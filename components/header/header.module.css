@@ -1,0 +1,12 @@
+.cont {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nevLinks {
+  display: flex;
+}
+
+.nevLinks div {
+  margin: 0 0.5rem;
+}
