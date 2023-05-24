@@ -22,9 +22,10 @@ export default function Hero() {
           <div>
             <Image
               src="/hero/img.png"
-              alt="My Image"
+              alt="Image of a team working on a computer. Discussing something with each other."
               width={340}
               height={340}
+              priority
             />
           </div>
         </section>
