@@ -2,7 +2,55 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
   height: 70vh;
+  padding: 5rem;
+}
+
+.Team {
+  animation: jump 1.5s linear infinite;
+}
+
+.Design {
+  animation: rotate 2s linear infinite;
+}
+
+.Development {
+  animation: jump 1.5s linear infinite;
+}
+
+.Marketing {
+  animation: rotate 2s linear infinite;
+}
+
+.Maintenance {
+  animation: jump 1.5s linear infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .property div {
@@ -11,4 +59,13 @@
 
 .property div p {
   width: 80%;
+}
+
+/* Mobile */
+@media (max-width: 750px) {
+  .property {
+    height: 100vh;
+    padding: 0;
+    align-items: center;
+  }
 }

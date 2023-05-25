@@ -19,12 +19,13 @@ export default function Hero() {
           </p>
         </section>
         <section className={styles.illustration}>
-          <div>
+          <div className={styles.img_cont}>
             <Image
+              className={styles.hero_image}
               src="/hero/img.png"
               alt="Image of a team working on a computer. Discussing something with each other."
-              width={340}
-              height={340}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
             />
           </div>
