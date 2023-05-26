@@ -15,7 +15,8 @@ export default function Hero() {
             At our company, we offer tailored teams to suit your specific
             project needs. Whether you are experiencing challenges with
             development, marketing, or design, our custom teams are available to
-            reduce the time and costs associated with your project.
+            reduce the time and costs associated with your project. Best for
+            startups😀.
           </p>
         </section>
         <section className={styles.illustration}>
