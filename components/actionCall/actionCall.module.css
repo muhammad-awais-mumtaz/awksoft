@@ -1,0 +1,31 @@
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+}
+
+.cont p {
+  width: 60%;
+  margin-bottom: 3rem;
+}
+
+.btn a {
+  text-decoration: none;
+  background-color: #0b0324;
+  color: #d6d1ce;
+  padding: 10px;
+}
+
+.btn a:hover {
+  background-color: #000000;
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 750px) {
+  .cont p {
+    width: 100%;
+  }
+}

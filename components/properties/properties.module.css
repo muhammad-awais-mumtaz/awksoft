@@ -6,14 +6,6 @@
   height: 50vh;
 }
 
-.Team {
-  animation: jump 1.5s linear infinite;
-}
-
-.Development {
-  animation: jump 1.5s linear infinite;
-}
-
 .Marketing {
   animation: rotate 2s linear infinite;
 }
@@ -71,13 +63,5 @@
 
   .property .text p {
     width: 100%;
-  }
-
-  .Team {
-    animation: none;
-  }
-
-  .Development {
-    animation: none;
   }
 }
