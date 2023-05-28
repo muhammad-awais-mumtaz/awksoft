@@ -16,6 +16,7 @@
   background-color: #0b0324;
   color: #d6d1ce;
   padding: 10px;
+  transition: color 0.5s;
 }
 
 .btn a:hover {
