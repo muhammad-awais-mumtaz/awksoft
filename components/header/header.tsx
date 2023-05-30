@@ -19,20 +19,22 @@ export default function Header() {
     <>
       <div className={styles.cont}>
         <section className={styles.logo}>
-          <h1>Awksoft</h1>
+          <Link href="/">
+            <h1>Awksoft</h1>
+          </Link>
         </section>
         <section className={styles.nevLinks}>
           <div>
             <Link href="/">Home</Link>
           </div>
           <div>
-            <Link href="/">About</Link>
+            <Link href="/about">About</Link>
           </div>
           <div>
-            <Link href="/">Blog</Link>
+            <Link href="/blog">Blog</Link>
           </div>
           <div>
-            <Link href="/">Sign Up</Link>
+            <Link href="/logIn">Log in</Link>
           </div>
         </section>
         <GiHamburgerMenu

@@ -28,18 +28,18 @@ export default function MobileMenu(props: {
             </Link>
           </div>
           <div>
-            <Link href="/" onClick={handleClick}>
+            <Link href="/about" onClick={handleClick}>
               About
             </Link>
           </div>
           <div>
-            <Link href="/" onClick={handleClick}>
+            <Link href="/blog" onClick={handleClick}>
               Blog
             </Link>
           </div>
           <div>
-            <Link href="/" onClick={handleClick}>
-              Sign Up
+            <Link href="/logIn" onClick={handleClick}>
+              Log in
             </Link>
           </div>
         </section>

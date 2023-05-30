@@ -2,6 +2,10 @@
   display: flex;
   justify-content: space-between;
   padding: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .nevLinks {
@@ -18,7 +22,7 @@
 
 .nevLinks div a {
   text-decoration: none;
-  margin: 0 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .hamCont {
@@ -36,7 +40,11 @@
 }
 
 /* Mobile */
-@media (max-width: 750px) {
+@media (max-width: 800px) {
+  .cont {
+    position: static;
+  }
+
   .cont .nevLinks {
     display: none;
   }
