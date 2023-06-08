@@ -27,7 +27,7 @@
 }
 
 /* Mobile */
-@media (max-width: 750px) {
+@media (max-width: 900px) {
   .cont p {
     width: 100%;
   }
