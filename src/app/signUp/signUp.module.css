@@ -15,7 +15,7 @@
 }
 
 .formCont {
-  width: 30%;
+  width: 40%;
 }
 
 .formCont h1 {
@@ -63,7 +63,7 @@
 }
 
 /* Mobile */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .cont {
     flex-direction: column;
     height: auto;
@@ -72,6 +72,15 @@
 
   .formCont {
     width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    width: 100%;
+    margin: 1rem;
   }
 }
 

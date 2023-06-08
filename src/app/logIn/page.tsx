@@ -21,7 +21,7 @@ export default function SignUp() {
           />
         </section>
         <section className={styles.formCont}>
-          <h1>Awksoft</h1>
+          <h1>Log in to Awksoft</h1>
           <form className={styles.form} action="/send-data-here" method="post">
             <div>
               <label className={styles.block} htmlFor="email">
