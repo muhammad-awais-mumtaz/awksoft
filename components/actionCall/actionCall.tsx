@@ -1,17 +1,34 @@
 import Link from "next/link";
 import styles from "./actionCall.module.css";
+import EmbVideo from "../embVideo/embVideo";
 
-export default function ActionCall() {
+interface IProps {
+  text: string;
+  heading: string;
+  linkOfVideo: string;
+  titleOfVideo: string;
+  linkOfButtonRedirect: string;
+  buttonText: string;
+}
+
+export default function ActionCall({
+  text,
+  heading,
+  linkOfVideo,
+  titleOfVideo,
+  linkOfButtonRedirect,
+  buttonText,
+}: IProps) {
   return (
     <>
       <div className={styles.cont}>
-        <p>
-          Please schedule a meeting at your earliest convenience to engage in a
-          productive discussion regarding your project, ensuring no time is
-          wasted.
-        </p>
+        <h1>{heading}</h1>
+        <div className={styles.video}>
+          <EmbVideo videoLink={linkOfVideo} videoTitle={titleOfVideo} />
+        </div>
+        <p>{text}</p>
         <div className={styles.btn}>
-          <Link href="/">Book a meeting now</Link>
+          <Link href={linkOfButtonRedirect}>{buttonText}</Link>
         </div>
       </div>
     </>
