@@ -17,17 +17,19 @@
 
 .btn a {
   text-decoration: none;
-  background-color: #0b0324;
-  color: #d6d1ce;
-  padding: 10px;
-  transition: all 0.4s;
+  border: none;
+  background-color: #d3e9ff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: background-color 0.5s;
   border-radius: 7px;
 }
 
 .btn a:hover {
-  background-color: #000000;
-  color: white;
-  border-radius: 0px;
+  background-color: aliceblue;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #d3e9ff;
 }
 
 /* Mobile */

@@ -3,7 +3,7 @@ import styles from "./blog.module.css";
 export default function Blog() {
   return (
     <>
-      <div>hello iam blog</div>
+      <div className={styles.cont}>hello iam blog</div>
     </>
   );
 }

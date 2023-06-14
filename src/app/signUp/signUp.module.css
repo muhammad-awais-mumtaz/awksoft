@@ -41,6 +41,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 70px;
 }
 
 .buttons button {
@@ -48,13 +49,15 @@
   background-color: #d3e9ff;
   padding: 0.5rem;
   font-size: 1rem;
-  transition: all 0.5s;
+  transition: background-color 0.5s;
+  border-radius: 7px;
 }
 
 .buttons button:hover {
   background-color: aliceblue;
   cursor: pointer;
   border-radius: 5px;
+  border: 2px solid #d3e9ff;
 }
 
 .block {
@@ -76,6 +79,7 @@
 
   .buttons {
     flex-direction: column;
+    height: auto;
   }
 
   .buttons button {
