@@ -32,16 +32,6 @@
   justify-content: center;
 }
 
-.card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 350px;
-  width: 30%;
-  padding: 2rem;
-}
-
 .text {
   margin-top: 1rem;
 }

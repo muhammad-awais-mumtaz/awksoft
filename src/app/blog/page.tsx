@@ -5,6 +5,7 @@ import styles from "./blog.module.css";
 import { useState, useEffect } from "react";
 
 import { blogsArray } from "../../../utils/blogs";
+import BlogCard from "../../../components/blogCard/blogCard";
 
 const blogsPerPage = 9;
 
@@ -61,21 +62,13 @@ export default function Blog() {
         </section>
         <div className={styles.cardCont}>
           {displayedBlogs.map((card) => (
-            <div className={styles.card} key={card.id}>
-              <section className={styles.image}>
-                <Image
-                  height={100}
-                  width={200}
-                  src={card.image}
-                  alt={card.altText + card.title}
-                  priority
-                />
-              </section>
-              <section className={styles.text}>
-                <p>{card.uploadDate}</p>
-                <h4>{card.title}</h4>
-              </section>
-            </div>
+            <BlogCard
+              key={card.id}
+              image={card.image}
+              altText={card.altText}
+              uploadDate={card.uploadDate}
+              title={card.title}
+            />
           ))}
         </div>
         <div className={styles.nextPrevBtn}>
@@ -92,7 +85,7 @@ export default function Blog() {
             onClick={handleNextPage}
             disabled={endIndex >= filteredBlogs.length}
           >
-            Next {">"}{" "}
+            Next {">"}
           </button>
         </div>
       </div>
