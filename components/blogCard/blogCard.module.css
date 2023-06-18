@@ -8,6 +8,18 @@
   padding: 2rem;
 }
 
+.text {
+  margin-top: 1rem;
+}
+
+.text p {
+  margin: 5px 0;
+}
+
+.text h4 {
+  margin: 5px 0;
+}
+
 @media (max-width: 900px) {
   .card {
     width: 250px;

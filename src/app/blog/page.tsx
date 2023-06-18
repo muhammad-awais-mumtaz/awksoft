@@ -68,6 +68,7 @@ export default function Blog() {
               altText={card.altText}
               uploadDate={card.uploadDate}
               title={card.title}
+              category={card.category}
             />
           ))}
         </div>

@@ -7,9 +7,16 @@ interface blogs {
   altText: string;
   uploadDate: string;
   title: string;
+  category: string;
 }
 
-export default function BlogCard({ image, altText, uploadDate, title }: blogs) {
+export default function BlogCard({
+  image,
+  altText,
+  uploadDate,
+  title,
+  category,
+}: blogs) {
   return (
     <div className={styles.card}>
       <section className={styles.image}>
@@ -23,6 +30,8 @@ export default function BlogCard({ image, altText, uploadDate, title }: blogs) {
       </section>
       <section className={styles.text}>
         <p>{uploadDate}</p>
+        <p>{category}</p>
+
         <h4>{title}</h4>
       </section>
     </div>

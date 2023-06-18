@@ -7,8 +7,6 @@
 }
 
 .search {
-  /* display: flex;
-  flex-direction: column; */
   margin-bottom: 1.5rem;
 }
 
@@ -30,18 +28,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-}
-
-.text {
-  margin-top: 1rem;
-}
-
-.text p {
-  margin: 5px 0;
-}
-
-.text h4 {
-  margin: 5px 0;
 }
 
 .nextPrevBtn {
