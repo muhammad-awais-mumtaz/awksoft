@@ -1,13 +1,22 @@
 .card {
+  height: 350px;
+  width: 30%;
+}
+
+.card a {
+  padding: 2rem;
+  transition: all 0.5s;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 350px;
-  width: 30%;
-  padding: 2rem;
 }
 
+.card a:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 20px;
+}
 .text {
   margin-top: 1rem;
 }
@@ -22,6 +31,6 @@
 
 @media (max-width: 900px) {
   .card {
-    width: 250px;
+    width: 270px;
   }
 }
