@@ -23,7 +23,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-01",
     title: "Introduction to Web Development",
     url: "web-development-intro",
-    category: "Web/App development",
+    category: "Web development",
     images: ["image1.jpg", "image2.jpg"],
     blogHtml: "<p>This is the content of the blog.</p>",
     uploader: {
@@ -41,7 +41,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-02",
     title: "Design Principles for Beginners",
     url: "design-principles",
-    category: "Design",
+    category: "Web design",
     images: ["image3.jpg", "image4.jpg"],
     blogHtml: "<p>This is another blog.</p>",
     uploader: {
@@ -77,7 +77,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-04",
     title: "Advanced Web Development Techniques",
     url: "advanced-web-development",
-    category: "Web/App development",
+    category: "Web development",
     images: ["image7.jpg", "image8.jpg"],
     blogHtml: "<p>This blog covers advanced web development techniques.</p>",
     uploader: {
@@ -95,7 +95,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-05",
     title: "Color Theory in Design",
     url: "color-theory-design",
-    category: "Design",
+    category: "web design",
     images: ["image9.jpg", "image10.jpg"],
     blogHtml: "<p>Learn about the importance of color theory in design.</p>",
     uploader: {
@@ -131,7 +131,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-07",
     title: "Responsive Web Design Best Practices",
     url: "responsive-web-design",
-    category: "Web/App development",
+    category: "Web development",
     images: ["image13.jpg", "image14.jpg"],
     blogHtml: "<p>Learn how to create responsive web designs.</p>",
     uploader: {
@@ -149,7 +149,7 @@ export const blogsArray: blogs[] = [
     uploadDate: "2023-06-09",
     title: "User Experience Design Principles",
     url: "user-experience-design",
-    category: "Design",
+    category: "web design",
     images: ["image15.jpg", "image16.jpg"],
     blogHtml: "<p>Explore the principles of user experience design.</p>",
     uploader: {

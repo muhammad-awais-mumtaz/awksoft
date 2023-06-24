@@ -1,7 +1,7 @@
 import styles from "./blogPage.module.css";
 
-import { blogsArray } from "../../../../utils/blogs";
-import { provider } from "../../../../utils/serviceProvider";
+import { blogsArray } from "../../../../../../utils/blogs";
+import { serviceProvider } from "../../../../../../utils/serviceProvider";
 
 interface pageProps {
   params: { blogPage: string };
@@ -19,7 +19,7 @@ interface blogPost {
   category: string;
   images: string[];
   blogHtml: string;
-  uploader: provider;
+  uploader: serviceProvider;
 }
 
 export default function Page({ params, searchParams }: pageProps) {

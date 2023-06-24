@@ -24,7 +24,11 @@ export default function BlogCard({
 }: blogs) {
   return (
     <div className={styles.card}>
-      <Link href={`/blog/${url.replace(/\s+/g, "+")}?id=${uid}`}>
+      <Link
+        href={`/blog/category/${category
+          .toLowerCase()
+          .replace(/\s+/g, "-")}/${url.replace(/\s+/g, "+")}?id=${uid}`}
+      >
         <section className={styles.image}>
           <Image
             height={100}

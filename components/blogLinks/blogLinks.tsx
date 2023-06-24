@@ -1,24 +1,31 @@
 "use client";
 
-import styles from "./webDesign.module.css";
+import styles from "./blogLinks.module.css";
 import { useState, useEffect } from "react";
 
-import { blogsArray } from "../../../../../utils/blogs";
-import BlogCard from "../../../../../components/blogCard/blogCard";
+import { blogsArray } from "../../utils/blogs";
+import BlogCard from "../blogCard/blogCard";
 
 const blogsPerPage = 9;
 
-export default function WebDesignBlog() {
+interface pageProps {
+  category: string;
+}
+
+export default function BlogLinks({ category }: pageProps) {
+  let categorySpecificBlog = blogsArray.filter((blog) =>
+    blog.category.toLowerCase().includes(category.toLowerCase())
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBlogs, setFilteredBlogs] = useState(blogsArray);
+  const [filteredBlogs, setFilteredBlogs] = useState(categorySpecificBlog);
 
   useEffect(() => {
-    const filtered = blogsArray.filter((blog) =>
+    const filtered = categorySpecificBlog.filter((blog) =>
       blog.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredBlogs(filtered);
-  }, [searchQuery, blogsArray]);
+  }, [searchQuery, categorySpecificBlog]);
 
   const startIndex = (currentPage - 1) * blogsPerPage;
   const endIndex = startIndex + blogsPerPage;
