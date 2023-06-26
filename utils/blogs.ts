@@ -61,7 +61,8 @@ export const blogsArray: blogs[] = [
     url: "marketing-strategies",
     category: "Marketing",
     images: ["image5.jpg", "image6.jpg"],
-    blogHtml: "<p>Yet another blog.</p>",
+    blogHtml:
+      "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero doloremque saepe incidunt. Minima officiis maiores temporibus mollitia dolores eius quo explicabo, eligendi id cumque ex, quam nostrum. Molestias, praesentium sit.</p>",
     uploader: {
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],

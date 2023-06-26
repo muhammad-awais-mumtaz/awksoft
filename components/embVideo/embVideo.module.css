@@ -11,6 +11,7 @@
 
 @media (max-width: 900px) {
   .cont iframe {
-    height: auto;
+    height: 250px;
+    width: auto;
   }
 }

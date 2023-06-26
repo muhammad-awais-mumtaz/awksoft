@@ -1,6 +1,40 @@
 .cont {
+  margin-top: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: column;
+}
+
+.mainImgTitle div {
+  margin: 2rem 0;
+}
+
+.featuredImg {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  max-height: 600px;
+  aspect-ratio: 70/45;
+}
+
+.cont h1 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.blogBody {
+  width: 60%;
+}
+
+@media (max-width: 900px) {
+  .cont {
+    margin: 0 2rem;
+  }
+  .blogBody {
+    width: 100%;
+    margin: 0 3rem;
+  }
 }

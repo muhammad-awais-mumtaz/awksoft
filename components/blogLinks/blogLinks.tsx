@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./blogLinks.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import { blogsArray } from "../../utils/blogs";
 import BlogCard from "../blogCard/blogCard";
@@ -13,8 +13,12 @@ interface pageProps {
 }
 
 export default function BlogLinks({ category }: pageProps) {
-  let categorySpecificBlog = blogsArray.filter((blog) =>
-    blog.category.toLowerCase().includes(category.toLowerCase())
+  let categorySpecificBlog = useMemo(
+    () =>
+      blogsArray.filter((blog) =>
+        blog.category.toLowerCase().includes(category.toLowerCase())
+      ),
+    [category]
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,25 +1,10 @@
 import styles from "./blogPage.module.css";
-
 import { blogsArray } from "../../../../../../utils/blogs";
-import { serviceProvider } from "../../../../../../utils/serviceProvider";
+import Image from "next/image";
 
 interface pageProps {
   params: { blogPage: string };
   searchParams: { id: string };
-}
-
-interface blogPost {
-  id: string;
-  uid: string;
-  featuredImage: string;
-  altText: string;
-  uploadDate: string;
-  title: string;
-  url: string;
-  category: string;
-  images: string[];
-  blogHtml: string;
-  uploader: serviceProvider;
 }
 
 export default function Page({ params, searchParams }: pageProps) {
@@ -31,7 +16,28 @@ export default function Page({ params, searchParams }: pageProps) {
   return (
     <>
       <div className={styles.cont}>
-        <section className={styles.mainImgTitle}>{blogPost?.title}</section>
+        {blogPost && (
+          <>
+            <section className={styles.mainImgTitle}>
+              <div className={styles.blogHading}>
+                <h1>{blogPost.title}</h1>
+              </div>
+              <div className={styles.featuredImg}>
+                <Image
+                  src={blogPost.featuredImage}
+                  alt={`featured image of blog titled ${blogPost.title}`}
+                  fill
+                  sizes="(max-width: 800px) 100vw, 700px"
+                  priority
+                />
+              </div>
+            </section>
+            <section
+              className={styles.blogBody}
+              dangerouslySetInnerHTML={{ __html: blogPost.blogHtml }}
+            ></section>
+          </>
+        )}
       </div>
     </>
   );
