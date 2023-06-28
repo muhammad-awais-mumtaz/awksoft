@@ -4,7 +4,6 @@ export interface blogs {
   id: string;
   uid: string;
   featuredImage: string;
-  altText: string;
   uploadDate: string;
   title: string;
   url: string;
@@ -19,7 +18,6 @@ export const blogsArray: blogs[] = [
     id: "1",
     uid: "1",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 1",
     uploadDate: "2023-06-01",
     title: "Introduction to Web Development",
     url: "web-development-intro",
@@ -27,6 +25,7 @@ export const blogsArray: blogs[] = [
     images: ["image1.jpg", "image2.jpg"],
     blogHtml: "<p>This is the content of the blog.</p>",
     uploader: {
+      employeeId: "1",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -37,7 +36,6 @@ export const blogsArray: blogs[] = [
     id: "2",
     uid: "2",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 2",
     uploadDate: "2023-06-02",
     title: "Design Principles for Beginners",
     url: "design-principles",
@@ -45,6 +43,7 @@ export const blogsArray: blogs[] = [
     images: ["image3.jpg", "image4.jpg"],
     blogHtml: "<p>This is another blog.</p>",
     uploader: {
+      employeeId: "2",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -55,7 +54,6 @@ export const blogsArray: blogs[] = [
     id: "3",
     uid: "3",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 3",
     uploadDate: "2023-06-03",
     title: "Marketing Strategies for Small Businesses",
     url: "marketing-strategies",
@@ -64,6 +62,7 @@ export const blogsArray: blogs[] = [
     blogHtml:
       "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero doloremque saepe incidunt. Minima officiis maiores temporibus mollitia dolores eius quo explicabo, eligendi id cumque ex, quam nostrum. Molestias, praesentium sit.</p>",
     uploader: {
+      employeeId: "3",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -74,7 +73,6 @@ export const blogsArray: blogs[] = [
     id: "4",
     uid: "4",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 4",
     uploadDate: "2023-06-04",
     title: "Advanced Web Development Techniques",
     url: "advanced-web-development",
@@ -82,6 +80,7 @@ export const blogsArray: blogs[] = [
     images: ["image7.jpg", "image8.jpg"],
     blogHtml: "<p>This blog covers advanced web development techniques.</p>",
     uploader: {
+      employeeId: "4",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -92,7 +91,6 @@ export const blogsArray: blogs[] = [
     id: "5",
     uid: "5",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 5",
     uploadDate: "2023-06-05",
     title: "Color Theory in Design",
     url: "color-theory-design",
@@ -100,6 +98,7 @@ export const blogsArray: blogs[] = [
     images: ["image9.jpg", "image10.jpg"],
     blogHtml: "<p>Learn about the importance of color theory in design.</p>",
     uploader: {
+      employeeId: "5",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -110,7 +109,6 @@ export const blogsArray: blogs[] = [
     id: "6",
     uid: "6",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 6",
     uploadDate: "2023-06-06",
     title: "Content Marketing Strategies",
     url: "content-marketing-strategies",
@@ -118,6 +116,7 @@ export const blogsArray: blogs[] = [
     images: ["image11.jpg", "image12.jpg"],
     blogHtml: "<p>Discover effective content marketing strategies.</p>",
     uploader: {
+      employeeId: "6",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -128,7 +127,6 @@ export const blogsArray: blogs[] = [
     id: "7",
     uid: "7",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 7",
     uploadDate: "2023-06-07",
     title: "Responsive Web Design Best Practices",
     url: "responsive-web-design",
@@ -136,6 +134,7 @@ export const blogsArray: blogs[] = [
     images: ["image13.jpg", "image14.jpg"],
     blogHtml: "<p>Learn how to create responsive web designs.</p>",
     uploader: {
+      employeeId: "7",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -146,7 +145,6 @@ export const blogsArray: blogs[] = [
     id: "9",
     uid: "9",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 9",
     uploadDate: "2023-06-09",
     title: "User Experience Design Principles",
     url: "user-experience-design",
@@ -154,6 +152,7 @@ export const blogsArray: blogs[] = [
     images: ["image15.jpg", "image16.jpg"],
     blogHtml: "<p>Explore the principles of user experience design.</p>",
     uploader: {
+      employeeId: "8",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",
@@ -164,7 +163,6 @@ export const blogsArray: blogs[] = [
     id: "10",
     uid: "10",
     featuredImage: "/blog/marketing.png",
-    altText: "Image 10",
     uploadDate: "2023-06-10",
     title: "Digital Marketing Strategies for E-commerce",
     url: "digital-marketing-e-commerce",
@@ -173,6 +171,7 @@ export const blogsArray: blogs[] = [
     blogHtml:
       "<p>Discover effective digital marketing strategies for e-commerce businesses.</p>",
     uploader: {
+      employeeId: "10",
       name: "Muhammad Awais Mumtaz",
       skills: ["Web development, Project controller"],
       profileImage: "/blog/myself",

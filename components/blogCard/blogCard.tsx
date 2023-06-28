@@ -6,7 +6,6 @@ import Image from "next/image";
 interface blogs {
   uid: string;
   image: string;
-  altText: string;
   uploadDate: string;
   title: string;
   url: string;
@@ -16,7 +15,6 @@ interface blogs {
 export default function BlogCard({
   uid,
   image,
-  altText,
   uploadDate,
   title,
   url,
@@ -34,7 +32,7 @@ export default function BlogCard({
             height={100}
             width={200}
             src={image}
-            alt={altText + title}
+            alt={"Thumbnail of blog titled " + title}
             priority
           />
         </section>
