@@ -9,6 +9,7 @@ export interface blogs {
   url: string;
   category: string;
   images: string[];
+  blogDescription: string;
   blogHtml: string;
   uploader: serviceProvider;
 }
@@ -23,6 +24,7 @@ export const blogsArray: blogs[] = [
     url: "web-development-intro",
     category: "Web development",
     images: ["image1.jpg", "image2.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>This is the content of the blog.</p>",
     uploader: {
       employeeId: "1",
@@ -41,6 +43,7 @@ export const blogsArray: blogs[] = [
     url: "design-principles",
     category: "Web design",
     images: ["image3.jpg", "image4.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>This is another blog.</p>",
     uploader: {
       employeeId: "2",
@@ -59,6 +62,7 @@ export const blogsArray: blogs[] = [
     url: "marketing-strategies",
     category: "Marketing",
     images: ["image5.jpg", "image6.jpg"],
+    blogDescription: "blog Description",
     blogHtml:
       "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero doloremque saepe incidunt. Minima officiis maiores temporibus mollitia dolores eius quo explicabo, eligendi id cumque ex, quam nostrum. Molestias, praesentium sit.</p>",
     uploader: {
@@ -78,6 +82,7 @@ export const blogsArray: blogs[] = [
     url: "advanced-web-development",
     category: "Web development",
     images: ["image7.jpg", "image8.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>This blog covers advanced web development techniques.</p>",
     uploader: {
       employeeId: "4",
@@ -96,6 +101,7 @@ export const blogsArray: blogs[] = [
     url: "color-theory-design",
     category: "web design",
     images: ["image9.jpg", "image10.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>Learn about the importance of color theory in design.</p>",
     uploader: {
       employeeId: "5",
@@ -114,6 +120,7 @@ export const blogsArray: blogs[] = [
     url: "content-marketing-strategies",
     category: "Marketing",
     images: ["image11.jpg", "image12.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>Discover effective content marketing strategies.</p>",
     uploader: {
       employeeId: "6",
@@ -132,6 +139,7 @@ export const blogsArray: blogs[] = [
     url: "responsive-web-design",
     category: "Web development",
     images: ["image13.jpg", "image14.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>Learn how to create responsive web designs.</p>",
     uploader: {
       employeeId: "7",
@@ -150,6 +158,7 @@ export const blogsArray: blogs[] = [
     url: "user-experience-design",
     category: "web design",
     images: ["image15.jpg", "image16.jpg"],
+    blogDescription: "blog Description",
     blogHtml: "<p>Explore the principles of user experience design.</p>",
     uploader: {
       employeeId: "8",
@@ -168,6 +177,7 @@ export const blogsArray: blogs[] = [
     url: "digital-marketing-e-commerce",
     category: "Marketing",
     images: ["image17.jpg", "image18.jpg"],
+    blogDescription: "m blog Description",
     blogHtml:
       "<p>Discover effective digital marketing strategies for e-commerce businesses.</p>",
     uploader: {

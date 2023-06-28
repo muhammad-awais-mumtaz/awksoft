@@ -1,5 +1,12 @@
 import Link from "next/link";
 import styles from "./blog.module.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Awksoft - Blog",
+  description:
+    "This is the awksoft blog on which we will discuss the topic of web development, web design and how to market your online presence.",
+};
 
 export default function BlogHome() {
   return (

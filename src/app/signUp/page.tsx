@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import styles from "./signUp.module.css";
 
 import Image from "next/image";
@@ -5,6 +6,12 @@ import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebook } from "react-icons/gr";
+
+export const metadata: Metadata = {
+  title: "Awksoft - Sign up",
+  description:
+    "Join Awksoft and gain access to a global network of development, marketing, and design professionals.",
+};
 
 export default function SignUp() {
   return (

@@ -1,10 +1,23 @@
 import styles from "./blogPage.module.css";
 import { blogsArray } from "../../../../../../utils/blogs";
 import Image from "next/image";
+import { Metadata } from "next";
 
 interface pageProps {
   params: { blogPage: string };
   searchParams: { id: string };
+}
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: pageProps): Promise<Metadata> {
+  let { id } = searchParams;
+  const blogPost = blogsArray.find((blog) => blog.uid === id);
+  return {
+    title: blogPost?.title,
+    description: blogPost?.blogDescription,
+  };
 }
 
 export default function Page({ params, searchParams }: pageProps) {

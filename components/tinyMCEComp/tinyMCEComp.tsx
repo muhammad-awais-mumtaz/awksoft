@@ -61,9 +61,7 @@ export default function TinyMCEComp() {
           id="description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
-        >
-          Description
-        </textarea>
+        ></textarea>
         <br />
         <label htmlFor="thumbnail">Thumbnail:</label>
         <input
