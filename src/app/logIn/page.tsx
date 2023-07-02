@@ -1,5 +1,7 @@
+"use client";
 import { Metadata } from "next";
 import styles from "./logIn.module.css";
+import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <>
       <div className={styles.cont}>
@@ -40,6 +44,8 @@ export default function SignUp() {
                 id="email"
                 name="email"
                 required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
             <div>
@@ -52,6 +58,8 @@ export default function SignUp() {
                 id="password"
                 name="password"
                 required
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </div>
             <div className={styles.buttons}>
