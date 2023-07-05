@@ -76,7 +76,6 @@ export default function BlogLinks({ category }: pageProps) {
               key={card.id}
               uid={card.uid}
               image={card.featuredImage}
-              altText={card.altText}
               uploadDate={card.uploadDate}
               title={card.title}
               category={card.category}

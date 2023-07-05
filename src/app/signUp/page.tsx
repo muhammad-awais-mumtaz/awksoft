@@ -1,13 +1,17 @@
 "use client";
-import { Metadata } from "next";
-import { useState } from "react";
 import styles from "./signUp.module.css";
+import { Metadata } from "next";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebook } from "react-icons/gr";
+import { BiShowAlt, BiHide } from "react-icons/bi";
+import signUp from "../../../utils/firebase/auth/signUp";
+import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
 
 export const metadata: Metadata = {
   title: "Awksoft - Sign up",
@@ -16,9 +20,30 @@ export const metadata: Metadata = {
 };
 
 export default function SignUp() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const handleForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { result, error } = await signUp(email, password);
+
+    if (error) {
+      console.log(error);
+      alert("Something went wrong. Check your internet or refresh the page.");
+    }
+
+    // else successful
+    console.log(result);
+    return router.push("/admin");
+  };
+
+  // Check password format
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,256}$/gm;
+
   return (
     <>
       <div className={styles.cont}>
@@ -27,28 +52,14 @@ export default function SignUp() {
             className={styles.image}
             src="/signUp/wallpaper.webp"
             alt="Image of a two developer hand shaking."
-            height={320}
-            width={320}
+            height={250}
+            width={250}
             priority
           />
         </section>
         <section className={styles.formCont}>
           <h1>Sign up for Awksoft</h1>
-          <form className={styles.form} action="/send-data-here" method="post">
-            <div className={styles.name}>
-              <label className={styles.block} htmlFor="name">
-                Name
-              </label>
-              <input
-                className={`${styles.block} ${styles.input}`}
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </div>
+          <form className={styles.form} onSubmit={handleForm}>
             <div>
               <label className={styles.block} htmlFor="email">
                 Email
@@ -65,26 +76,45 @@ export default function SignUp() {
             </div>
             <div>
               <label className={styles.block} htmlFor="Password">
-                Password
+                Password{" "}
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={styles.showPassBtn}
+                >
+                  {showPassword ? <BiHide /> : <BiShowAlt />}
+                </span>
               </label>
               <input
                 className={`${styles.block} ${styles.input}`}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
+              {!passwordRegex.test(password) ? (
+                <span className={styles.warn}>
+                  Password must be minimum eight characters, at least one
+                  uppercase letter, one lowercase letter, one number and one
+                  special character.
+                </span>
+              ) : (
+                <span className={styles.cong}>Good Password</span>
+              )}
             </div>
             <div className={styles.buttons}>
-              <button type="submit">Sign up</button>
-              <button type="submit">
+              <button type="submit" className={styles.button}>
+                Sign up
+              </button>
+              <span
+                className={styles.button}
+                onClick={() => {
+                  signUserWithGoogleProvider();
+                }}
+              >
                 Sign Up with <FcGoogle />
-              </button>
-              <button type="submit">
-                Sign Up with <GrFacebook />
-              </button>
+              </span>
             </div>
             <div>
               Have an account? <Link href="/logIn"> Log in</Link>

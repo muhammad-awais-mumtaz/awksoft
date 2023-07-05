@@ -39,12 +39,12 @@
 
 .buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   height: 70px;
 }
 
-.buttons button {
+.buttons .button {
   border: none;
   background-color: #d3e9ff;
   padding: 0.5rem;
@@ -53,16 +53,29 @@
   border-radius: 7px;
 }
 
-.buttons button:hover {
+.buttons .button:hover {
   background-color: aliceblue;
   cursor: pointer;
   border-radius: 5px;
   transform: scale(1.05);
 }
 
+.showPassBtn {
+  transition: all 0.5s;
+}
+
+.showPassBtn:hover {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 .block {
   display: block;
   width: 100%;
+}
+
+.warn {
+  color: crimson;
 }
 
 /* Mobile */

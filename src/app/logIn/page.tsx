@@ -1,13 +1,17 @@
 "use client";
 import { Metadata } from "next";
 import styles from "./logIn.module.css";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebook } from "react-icons/gr";
+import { useRouter } from "next/navigation";
+import signIn from "../../../utils/firebase/auth/logIn";
+import { BiHide, BiShowAlt } from "react-icons/bi";
+import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
 
 export const metadata: Metadata = {
   title: "Awksoft - Log in",
@@ -15,9 +19,36 @@ export const metadata: Metadata = {
     "Log in to Awksoft and connect with a community of skilled development, marketing, and design professionals",
 };
 
-export default function SignUp() {
+export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showUserNotFoundErr, setShowUserNotFoundErr] = useState(false);
+  const [showWrongPassErr, setShowWrongPassErr] = useState(false);
+  const router = useRouter();
+
+  const handleForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { result, error } = await signIn(email, password);
+
+    if (error) {
+      if (error.code === "auth/user-not-found") {
+        setShowUserNotFoundErr(!showUserNotFoundErr);
+        console.log(error.code);
+      } else if (error.code === "auth/wrong-password") {
+        setShowWrongPassErr(!showWrongPassErr);
+        console.log(error.code);
+      } else {
+        console.log(error.code);
+        alert(error.code);
+      }
+    } else {
+      // else successful
+      console.log(result);
+      return router.push("/admin");
+    }
+  };
   return (
     <>
       <div className={styles.cont}>
@@ -26,14 +57,28 @@ export default function SignUp() {
             className={styles.image}
             src="/signUp/wallpaper.webp"
             alt="Image of a two developer hand shaking."
-            height={320}
-            width={320}
+            height={250}
+            width={250}
             priority
           />
         </section>
         <section className={styles.formCont}>
           <h1>Log in to Awksoft</h1>
-          <form className={styles.form} action="/send-data-here" method="post">
+          <form className={styles.form} onSubmit={handleForm}>
+            <div>
+              {showUserNotFoundErr && (
+                <span className={styles.warn}>
+                  User not found! Check your email/password, try again
+                </span>
+              )}
+            </div>
+            <div>
+              {showWrongPassErr && (
+                <span className={styles.warn}>
+                  Wrong password! Check your password, try again
+                </span>
+              )}
+            </div>
             <div>
               <label className={styles.block} htmlFor="email">
                 Email
@@ -50,11 +95,17 @@ export default function SignUp() {
             </div>
             <div>
               <label className={styles.block} htmlFor="Password">
-                Password
+                Password{" "}
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={styles.showPassBtn}
+                >
+                  {showPassword ? <BiHide /> : <BiShowAlt />}
+                </span>
               </label>
               <input
                 className={`${styles.block} ${styles.input}`}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 required
@@ -63,13 +114,18 @@ export default function SignUp() {
               />
             </div>
             <div className={styles.buttons}>
-              <button type="submit">Log in</button>
-              <button type="submit">
+              <button type="submit" className={styles.button}>
+                Log in
+              </button>
+
+              <span
+                className={styles.button}
+                onClick={() => {
+                  signUserWithGoogleProvider();
+                }}
+              >
                 Log in with <FcGoogle />
-              </button>
-              <button type="submit">
-                Log in with <GrFacebook />
-              </button>
+              </span>
             </div>
             <div>
               Don't have an account? <Link href="/signUp"> Sign up</Link>
