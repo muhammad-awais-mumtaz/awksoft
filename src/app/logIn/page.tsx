@@ -1,23 +1,17 @@
 "use client";
-import { Metadata } from "next";
+
 import styles from "./logIn.module.css";
 import { FormEvent, useState } from "react";
+import { Metadata } from "next";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
-import { GrFacebook } from "react-icons/gr";
 import { useRouter } from "next/navigation";
 import signIn from "../../../utils/firebase/auth/logIn";
 import { BiHide, BiShowAlt } from "react-icons/bi";
 import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
-
-export const metadata: Metadata = {
-  title: "Awksoft - Log in",
-  description:
-    "Log in to Awksoft and connect with a community of skilled development, marketing, and design professionals",
-};
 
 export default function LogIn() {
   const [email, setEmail] = useState("");

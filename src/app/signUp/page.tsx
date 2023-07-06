@@ -1,6 +1,5 @@
 "use client";
 import styles from "./signUp.module.css";
-import { Metadata } from "next";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -8,16 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
-import { GrFacebook } from "react-icons/gr";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 import signUp from "../../../utils/firebase/auth/signUp";
 import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
-
-export const metadata: Metadata = {
-  title: "Awksoft - Sign up",
-  description:
-    "Join Awksoft and gain access to a global network of development, marketing, and design professionals.",
-};
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
