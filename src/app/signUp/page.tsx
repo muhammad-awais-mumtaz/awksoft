@@ -23,6 +23,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showError, setShowError] = useState(false);
   const router = useRouter();
 
   const handleForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -38,6 +39,21 @@ export default function SignUp() {
     // else successful
     console.log(result);
     return router.push("/admin");
+  };
+
+  const handleSignupWithGoogle = async () => {
+    const { result, error } = await signUserWithGoogleProvider();
+    if (error) {
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log(error.code);
+        setShowError(!showError);
+      } else {
+        alert(error.code);
+      }
+    } else {
+      console.log(result);
+      router.push("/admin");
+    }
   };
 
   // Check password format
@@ -59,6 +75,12 @@ export default function SignUp() {
         </section>
         <section className={styles.formCont}>
           <h1>Sign up for Awksoft</h1>
+          {showError && (
+            <span className={styles.warn}>
+              You closed the pop up sign up. It is safe and secure, provided by{" "}
+              <FcGoogle />.
+            </span>
+          )}
           <form className={styles.form} onSubmit={handleForm}>
             <div>
               <label className={styles.block} htmlFor="email">
@@ -107,12 +129,7 @@ export default function SignUp() {
               <button type="submit" className={styles.button}>
                 Sign up
               </button>
-              <span
-                className={styles.button}
-                onClick={() => {
-                  signUserWithGoogleProvider();
-                }}
-              >
+              <span className={styles.button} onClick={handleSignupWithGoogle}>
                 Sign Up with <FcGoogle />
               </span>
             </div>
