@@ -3,6 +3,7 @@
 import Link from "next/link";
 import styles from "./header.module.css";
 import { useState } from "react";
+import { useAuth } from "../../utils/firebase/auth/useAuth";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -10,6 +11,7 @@ import MobileMenu from "./mobileNav/mobileNav";
 
 export default function Header() {
   let [clicked, setClicked] = useState(false);
+  const user = useAuth();
 
   function handleClick() {
     setClicked(!clicked);
@@ -24,9 +26,11 @@ export default function Header() {
           </Link>
         </section>
         <section className={styles.nevLinks}>
-          <div>
-            <Link href="/">Home</Link>
-          </div>
+          {user && (
+            <div>
+              <Link href="/admin">Admin</Link>
+            </div>
+          )}
           <div>
             <Link href="/about">About</Link>
           </div>
