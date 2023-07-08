@@ -1,0 +1,72 @@
+.img {
+  border-radius: 50%;
+}
+
+.userDetails h3 {
+  margin: 1rem 0 0.4rem 0;
+}
+
+.skills {
+  margin-top: 2rem;
+}
+
+.skills h3 {
+  margin: 1rem 0 0.4rem 0;
+}
+
+.projectsGoingOn {
+  margin-top: 2rem;
+}
+
+.projectsGoingOn h3 {
+  margin: 1rem 0 0.4rem 0;
+}
+
+.projectsDone {
+  margin-top: 2rem;
+}
+
+.projectsDone h3 {
+  margin: 1rem 0 0.4rem 0;
+}
+.blogs {
+  margin-top: 2rem;
+}
+
+.blogs h3 {
+  margin: 1rem 0 0.4rem 0;
+}
+
+.warn {
+  color: crimson;
+}
+
+.cong {
+  color: green;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.buttons .btn {
+  border: none;
+  background-color: #d3e9ff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.5s;
+  border-radius: 7px;
+}
+
+.buttons .btn:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+  border-radius: 5px;
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+}
