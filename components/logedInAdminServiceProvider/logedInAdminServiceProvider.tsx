@@ -159,7 +159,7 @@ export default function LogedInAdminServiceProvider() {
     );
   } else {
     return (
-      <div className={styles.const}>
+      <div className={styles.cont}>
         <p>
           You are not log in.
           <Link href={"/logIn"} className={styles.warn}>

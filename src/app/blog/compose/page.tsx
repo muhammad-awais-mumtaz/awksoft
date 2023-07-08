@@ -1,18 +1,32 @@
-import { Metadata } from "next";
-import TinyMCEComp from "../../../../components/tinyMCEComp/tinyMCEComp";
-
-export const metadata: Metadata = {
-  title: "Awksoft - Blog compose",
-  description: "This is page for composing the blog",
-};
-
+"use client";
 import styles from "./compose.module.css";
+import TinyMCEComp from "../../../../components/tinyMCEComp/tinyMCEComp";
+import Link from "next/link";
+
+import { useAuth } from "../../../../utils/firebase/auth/useAuth";
+
 export default function Compose() {
-  return (
-    <>
-      <div className={styles.editorCont}>
-        <TinyMCEComp />
+  const user = useAuth();
+  if (user) {
+    return (
+      <>
+        <div className={styles.cont}>
+          <TinyMCEComp />
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div className={styles.cont}>
+        <p>
+          You are not log in.
+          <Link href={"/logIn"} className={styles.warn}>
+            {" "}
+            Log in{" "}
+          </Link>{" "}
+          please!
+        </p>
       </div>
-    </>
-  );
+    );
+  }
 }
