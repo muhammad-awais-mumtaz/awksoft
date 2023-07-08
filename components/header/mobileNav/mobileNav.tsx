@@ -4,11 +4,13 @@ import styles from "./mobileNav.module.css";
 import Link from "next/link";
 
 import { ImCross } from "react-icons/im";
+import { useAuth } from "../../../utils/firebase/auth/useAuth";
 
 export default function MobileMenu(props: {
   clickedTogglerVar: boolean;
   clickSetter: any;
 }) {
+  const user = useAuth();
   let { clickedTogglerVar, clickSetter } = props;
 
   function handleClick() {
@@ -22,11 +24,13 @@ export default function MobileMenu(props: {
           <ImCross className={styles.crossDiv} onClick={handleClick} />
         </section>
         <section className={styles.nevLinks}>
-          <div>
-            <Link href="/" onClick={handleClick}>
-              Home
-            </Link>
-          </div>
+          {user && (
+            <div>
+              <Link href="/admin" onClick={handleClick}>
+                Admin
+              </Link>
+            </div>
+          )}
           <div>
             <Link href="/about" onClick={handleClick}>
               About
