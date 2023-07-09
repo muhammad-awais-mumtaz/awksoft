@@ -1,15 +1,11 @@
 "use client";
 import styles from "./admin.module.css";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../../../utils/firebase/auth/useAuth";
 import Link from "next/link";
 import LogedInAdminServiceProvider from "../../../components/logedInAdminServiceProvider/logedInAdminServiceProvider";
 
 export default function Admin() {
-  const router = useRouter();
-
   const user = useAuth();
-  // Use the user's authentication state
 
   if (user) {
     return (

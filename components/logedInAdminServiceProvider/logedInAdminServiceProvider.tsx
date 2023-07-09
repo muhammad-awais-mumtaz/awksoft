@@ -103,11 +103,11 @@ export default function LogedInAdminServiceProvider() {
             )}
           </div>
           <div className={styles.userDetails}>
-            <h3>
-              {user.displayName}{" "}
+            <h3>{user.displayName} </h3>
+            <p>
+              {user.email}{" "}
               {user.emailVerified ? <BsCheckCircleFill /> : <RxCross2 />}
-            </h3>
-            <p>{user.email}</p>
+            </p>
           </div>
         </section>
 
@@ -141,7 +141,7 @@ export default function LogedInAdminServiceProvider() {
           <span className={styles.btn}>
             {user.displayName && (
               <Link
-                href={`serviceProvider/${user.displayName
+                href={`user/serviceProvider/${user.displayName
                   .toLowerCase()
                   .replace(/\s+/g, "-")}`}
               >
@@ -158,17 +158,6 @@ export default function LogedInAdminServiceProvider() {
       </div>
     );
   } else {
-    return (
-      <div className={styles.cont}>
-        <p>
-          You are not log in.
-          <Link href={"/logIn"} className={styles.warn}>
-            {" "}
-            Log in{" "}
-          </Link>{" "}
-          please!
-        </p>
-      </div>
-    );
+    return <></>;
   }
 }
