@@ -50,9 +50,15 @@ export default function Page({ params, searchParams }: pageProps) {
           </section>
           <section className={styles.buttons}>
             <span className={styles.btn}>
-              <Link href={"/user/serviceProvider/editProfile"}>
-                Edit Profile <CgProfile />
-              </Link>
+              {user.displayName && (
+                <Link
+                  href={`${user.displayName
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}/editProfile`}
+                >
+                  Edit Profile <CgProfile />
+                </Link>
+              )}
             </span>
             <span
               className={styles.btn}

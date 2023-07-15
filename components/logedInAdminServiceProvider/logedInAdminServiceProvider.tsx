@@ -114,27 +114,27 @@ export default function LogedInAdminServiceProvider() {
         <section className={styles.skills}>
           <h3>Skills</h3>
           <div>
-            {skills.map((skill) => {
-              return <span>{skill}, </span>;
+            {skills.map((skill, i) => {
+              return <span key={i}>{skill}, </span>;
             })}
           </div>
         </section>
         <section className={styles.projectsGoingOn}>
           <h3>Going on projects</h3>
-          {projectsGoingOn.map((project) => {
-            return <span>{project}, </span>;
+          {projectsGoingOn.map((project, i) => {
+            return <span key={i}>{project}, </span>;
           })}
         </section>
         <section className={styles.projectsDone}>
           <h3>Projects completed</h3>
-          {projectsDone.map((project) => {
-            return <span>{project}, </span>;
+          {projectsDone.map((project, i) => {
+            return <span key={i}>{project}, </span>;
           })}
         </section>
         <section className={styles.blogs}>
           <h3>Blogs</h3>
-          {blogs.map((blog) => {
-            return <span>{blog}, </span>;
+          {blogs.map((blog, i) => {
+            return <span key={i}>{blog}, </span>;
           })}
         </section>
         <section className={styles.buttons}>

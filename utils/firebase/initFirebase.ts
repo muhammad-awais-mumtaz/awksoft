@@ -23,5 +23,5 @@ if (app.name && typeof window !== "undefined") {
 const firestore = getFirestore(app);
 const auth = getAuth(app);
 
-// Expose the instances we'll need
+// Export the instances we'll need
 export { app, firestore, auth };
