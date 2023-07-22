@@ -37,9 +37,11 @@ export default function Header() {
           <div>
             <Link href="/blog">Blog</Link>
           </div>
-          <div>
-            <Link href="/logIn">Log in</Link>
-          </div>
+          {!user && (
+            <div>
+              <Link href="/logIn">Log in</Link>
+            </div>
+          )}
         </section>
         <GiHamburgerMenu
           className={`${styles.hamCont} ${clicked ? styles.hide : styles.show}`}

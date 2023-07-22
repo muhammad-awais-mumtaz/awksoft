@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.proImg {
+  border-radius: 50%;
+}
+
 .warper {
   width: 40vw;
 }

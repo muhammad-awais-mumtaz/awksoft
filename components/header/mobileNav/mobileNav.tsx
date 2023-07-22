@@ -41,11 +41,13 @@ export default function MobileMenu(props: {
               Blog
             </Link>
           </div>
-          <div>
-            <Link href="/logIn" onClick={handleClick}>
-              Log in
-            </Link>
-          </div>
+          {!user && (
+            <div>
+              <Link href="/logIn" onClick={handleClick}>
+                Log in
+              </Link>
+            </div>
+          )}
         </section>
       </div>
     </div>

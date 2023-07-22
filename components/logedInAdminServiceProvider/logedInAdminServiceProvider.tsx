@@ -119,20 +119,8 @@ export default function LogedInAdminServiceProvider() {
             })}
           </div>
         </section>
-        <section className={styles.projectsGoingOn}>
-          <h3>Going on projects</h3>
-          {projectsGoingOn.map((project, i) => {
-            return <span key={i}>{project}, </span>;
-          })}
-        </section>
-        <section className={styles.projectsDone}>
-          <h3>Projects completed</h3>
-          {projectsDone.map((project, i) => {
-            return <span key={i}>{project}, </span>;
-          })}
-        </section>
         <section className={styles.blogs}>
-          <h3>Blogs</h3>
+          <h3>Composed blogs</h3>
           {blogs.map((blog, i) => {
             return <span key={i}>{blog}, </span>;
           })}

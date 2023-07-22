@@ -35,7 +35,11 @@ export default function EditProfile() {
 
   const handleSubmit = async () => {
     await updateUserNameAndPhoto(user, userName, newProfileLink);
-    router.refresh();
+    router.push(
+      `user/serviceProvider/${user.displayName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}`
+    );
   };
 
   return (
@@ -47,10 +51,12 @@ export default function EditProfile() {
           {user?.photoURL && (
             <div>
               <Image
+                className={styles.proImg}
                 src={user.photoURL}
                 height={100}
                 width={100}
                 alt={"Profile image of " + user.displayName}
+                priority
               />
             </div>
           )}
@@ -63,10 +69,12 @@ export default function EditProfile() {
               {newProfileLink && (
                 <div>
                   <Image
+                    className={styles.proImg}
                     src={newProfileLink}
                     height={100}
                     width={100}
                     alt={"Profile image of " + user?.displayName}
+                    priority
                   />
                 </div>
               )}
