@@ -1,0 +1,25 @@
+.cont {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formCont {
+  width: 40%;
+}
+
+.formCont h1 {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .cont {
+    margin-top: 0;
+  }
+
+  .formCont {
+    width: 80%;
+  }
+}

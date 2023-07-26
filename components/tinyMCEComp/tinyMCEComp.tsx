@@ -138,9 +138,9 @@ export default function TinyMCEComp() {
         />
         <div className={styles.buttons}>
           <button type="submit">Submit</button>
-          <button className={styles.btn} onClick={log}>
+          <span className={styles.btn} onClick={log}>
             want to see the content
-          </button>
+          </span>
         </div>
         <div dangerouslySetInnerHTML={{ __html: blogHtml }}></div>
       </form>

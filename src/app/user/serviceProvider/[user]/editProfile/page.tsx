@@ -35,11 +35,14 @@ export default function EditProfile() {
 
   const handleSubmit = async () => {
     await updateUserNameAndPhoto(user, userName, newProfileLink);
-    router.push(
-      `user/serviceProvider/${user.displayName
-        .toLowerCase()
-        .replace(/\s+/g, "-")}`
-    );
+    if(user?.displayName){
+
+      router.push(
+        `/user/serviceProvider/${user.displayName
+          .toLowerCase()
+          .replace(/\s+/g, "-")}`
+      );
+    }
   };
 
   return (
@@ -66,11 +69,22 @@ export default function EditProfile() {
               <label className={styles.block} htmlFor="profilePic">
                 New Profile picture
               </label>
-              {newProfileLink && (
+              {newProfileLink ? (
                 <div>
                   <Image
                     className={styles.proImg}
                     src={newProfileLink}
+                    height={100}
+                    width={100}
+                    alt={"Profile image of " + user?.displayName}
+                    priority
+                  />
+                </div>
+              ):(
+                <div>
+                  <Image
+                    className={styles.proImg}
+                    src="/proAvatar/proAvatar.png"
                     height={100}
                     width={100}
                     alt={"Profile image of " + user?.displayName}
