@@ -2,7 +2,7 @@
 import { ChangeEvent, useState } from "react";
 import styles from "./editProfile.module.css";
 import { useAuth } from "../../../../../../utils/firebase/auth/useAuth";
-import { updateUserNameAndPhoto } from "../../../../../../utils/firebase/updateUser/updateUser";
+import { updateUserNameOrPhoto } from "../../../../../../utils/firebase/updateUser/updateUser";
 import { uploadImage } from "../../../../../../utils/firebase/uploadImage/uploadImage";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -34,9 +34,8 @@ export default function EditProfile() {
   };
 
   const handleSubmit = async () => {
-    await updateUserNameAndPhoto(user, userName, newProfileLink);
-    if(user?.displayName){
-
+    await updateUserNameOrPhoto(user, userName, newProfileLink);
+    if (user?.displayName) {
       router.push(
         `/user/serviceProvider/${user.displayName
           .toLowerCase()
@@ -80,7 +79,7 @@ export default function EditProfile() {
                     priority
                   />
                 </div>
-              ):(
+              ) : (
                 <div>
                   <Image
                     className={styles.proImg}

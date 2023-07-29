@@ -1,7 +1,8 @@
+import { getDataFromCollection } from "./firebase/firestore/databaseManip";
+
 export interface serviceProvider {
   employeeId: string;
-  name: string;
+  name: null | string;
   skills: string[];
-  profileImage: string;
-  blogger: boolean;
+  profileImage: null | string;
 }

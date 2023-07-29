@@ -67,3 +67,10 @@
   border-radius: 5px;
   transform: scale(1.05);
 }
+
+.disabled {
+  /* Apply styles to make the element look disabled */
+  opacity: 0.3; /* Lower the opacity to give a faded appearance */
+  pointer-events: none; /* Disable pointer events to prevent interactions */
+  cursor: not-allowed; /* Set the cursor to 'not allowed' to show it's disabled */
+}

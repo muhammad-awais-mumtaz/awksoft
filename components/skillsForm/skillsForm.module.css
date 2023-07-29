@@ -10,6 +10,7 @@
   border: 1px solid #0f0f0f;
   transition: padding 0.4s;
   padding: 3px;
+  margin-bottom: 1rem;
 }
 
 .input:focus {
@@ -39,8 +40,27 @@
   border-radius: 5px;
   transform: scale(1.05);
 }
+.btn {
+  border: none;
+  background-color: #d3e9ff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s;
+  border-radius: 7px;
+}
+
+.btn:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+  border-radius: 5px;
+  transform: scale(1.05);
+}
 
 .block {
   display: block;
   width: 100%;
+}
+
+.submitBtnCont {
+  margin-top: 5rem;
 }

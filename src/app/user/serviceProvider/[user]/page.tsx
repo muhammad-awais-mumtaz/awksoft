@@ -28,10 +28,18 @@ export default function Page({ params, searchParams }: pageProps) {
         <div className={styles.innerDiv}>
           <section className={styles.userPro}>
             <div className={styles.proImg}>
-              {user.photoURL && (
+              {user.photoURL ? (
                 <Image
                   className={styles.img}
                   src={user.photoURL}
+                  height={70}
+                  width={70}
+                  alt={"image of user named " + user.displayName}
+                />
+              ) : (
+                <Image
+                  className={styles.img}
+                  src="/proAvatar/proAvatar.png"
                   height={70}
                   width={70}
                   alt={"image of user named " + user.displayName}

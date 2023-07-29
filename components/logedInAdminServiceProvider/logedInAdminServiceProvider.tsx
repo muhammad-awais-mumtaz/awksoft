@@ -7,63 +7,9 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { ImBlog } from "react-icons/im";
+import { useEffect, useState } from "react";
+import { getDataFromCollection } from "../../utils/firebase/firestore/databaseManip";
 
-const skills = [
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-];
-
-const projectsGoingOn = [
-  "Web development",
-  "Marketing",
-  "Web development",
-  "Marketing",
-  "Web development",
-  "Marketing",
-  "Web development",
-  "Marketing",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-];
-const projectsDone = [
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-];
 const blogs = [
   "Web development",
   "Marketing",
@@ -87,12 +33,25 @@ const blogs = [
 
 export default function LogedInAdminServiceProvider() {
   const user = useAuth();
+  const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
+  const [skills, setSkills] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getDataFromCollection("serviceProvider");
+      setServiceProvidersData(data);
+      serviceProvidersData.map((singleData) => setSkills(singleData.skills));
+    };
+
+    fetchData();
+  }, []);
+
   if (user) {
     return (
       <div className={styles.cont}>
         <section className={styles.profileDetails}>
           <div className={styles.proImg}>
-            {user.photoURL && (
+            {user.photoURL ? (
               <Image
                 className={styles.img}
                 src={user.photoURL}
@@ -100,14 +59,33 @@ export default function LogedInAdminServiceProvider() {
                 width={70}
                 alt={"image of user named " + user.displayName}
               />
+            ) : (
+              <Image
+                className={styles.img}
+                src="/proAvatar/proAvatar.png"
+                height={70}
+                width={70}
+                alt={"image of user named " + user.displayName}
+              />
             )}
           </div>
           <div className={styles.userDetails}>
-            <h3>{user.displayName} </h3>
-            <p>
+            {user.displayName ? (
+              <h3>{user.displayName} </h3>
+            ) : (
+              <h3>No user name please compleat your profile</h3>
+            )}
+            <div>
               {user.email}{" "}
-              {user.emailVerified ? <BsCheckCircleFill /> : <RxCross2 />}
-            </p>
+              {user.emailVerified ? (
+                <BsCheckCircleFill />
+              ) : (
+                <p className={styles.warn}>
+                  <RxCross2 /> Your Email is not verified check your email
+                  please
+                </p>
+              )}
+            </div>
           </div>
         </section>
 
@@ -126,18 +104,32 @@ export default function LogedInAdminServiceProvider() {
           })}
         </section>
         <section className={styles.buttons}>
-          <span className={styles.btn}>
-            {user.displayName && (
-              <Link
-                href={`user/serviceProvider/${user.displayName
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-              >
-                Profile <CgProfile />
+          {user.displayName && user.emailVerified ? (
+            <span className={styles.btn}>
+              {user.displayName && (
+                <Link
+                  href={`user/serviceProvider/${user.displayName
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                >
+                  Profile <CgProfile />
+                </Link>
+              )}
+            </span>
+          ) : (
+            <span className={styles.btn}>
+              <Link href={`user/serviceProvider/compleatProfile`}>
+                <span className={styles.warn}>
+                  Compleat profile <CgProfile />
+                </span>
               </Link>
-            )}
-          </span>
-          <span className={styles.btn}>
+            </span>
+          )}
+          <span
+            className={`${styles.btn} ${
+              !user.displayName || !user.emailVerified ? styles.disabled : ""
+            }`}
+          >
             <Link href={"/blog/compose"}>
               Compose blog <ImBlog />
             </Link>

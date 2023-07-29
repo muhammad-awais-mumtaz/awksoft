@@ -1,9 +1,9 @@
 import { updateProfile } from "firebase/auth";
 
-export async function updateUserNameAndPhoto(
+export async function updateUserNameOrPhoto(
   user: any,
-  newUserName: string | null,
-  newImageUrl: string | null
+  newUserName: null | string,
+  newImageUrl: null | string
 ) {
   if (user) {
     if (newImageUrl) {

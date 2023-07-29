@@ -10,9 +10,13 @@ import { FcGoogle } from "react-icons/fc";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 import signUp from "../../../utils/firebase/auth/signUp";
 import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
+import { updateUserNameOrPhoto } from "../../../utils/firebase/updateUser/updateUser";
+import { uploadDataToCollection } from "../../../utils/firebase/firestore/databaseManip";
+import { serviceProvider } from "../../../utils/serviceProvider";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -24,16 +28,37 @@ export default function SignUp() {
     const { result, error } = await signUp(email, password);
 
     if (error) {
-      console.log(error);
-      alert("Something went wrong. Check your internet or refresh the page.");
+      console.log(error.code);
+      if (error.code === "auth/email-already-in-use") {
+        alert("Account already in use. Log in to your account.");
+        router.push("/logIn");
+      } else {
+        alert(
+          "Something went wrong. Check your internet or refresh the page. The Error is " +
+            error.code
+        );
+      }
     }
 
     // else successful
-    console.log(result);
-    return router.push("/admin");
+    if (result) {
+      console.log(result);
+      const user = result.user;
+      updateUserNameOrPhoto(user, name, "").then(() => {
+        const userData: serviceProvider = {
+          employeeId: user.uid,
+          name: user.displayName,
+          skills: [],
+          profileImage: user.photoURL,
+        };
+
+        uploadDataToCollection("serviceProvider", userData);
+      });
+      return router.push(`user/serviceProvider/compleatProfile`);
+    }
   };
 
-  const handleSignupWithGoogle = async () => {
+  const handleSignUpWithGoogle = async () => {
     const { result, error } = await signUserWithGoogleProvider();
     if (error) {
       if (error.code === "auth/popup-closed-by-user") {
@@ -74,6 +99,20 @@ export default function SignUp() {
             </span>
           )}
           <form className={styles.form} onSubmit={handleForm}>
+            <div>
+              <label className={styles.block} htmlFor="name">
+                Name
+              </label>
+              <input
+                className={`${styles.block} ${styles.input}`}
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
             <div>
               <label className={styles.block} htmlFor="email">
                 Email
@@ -121,7 +160,7 @@ export default function SignUp() {
               <button type="submit" className={styles.button}>
                 Sign up
               </button>
-              <span className={styles.button} onClick={handleSignupWithGoogle}>
+              <span className={styles.button} onClick={handleSignUpWithGoogle}>
                 Sign Up with <FcGoogle />
               </span>
             </div>
