@@ -44,7 +44,7 @@ export default function LogedInAdminServiceProvider() {
     };
 
     fetchData();
-  }, []);
+  }, [serviceProvidersData, skills, user?.emailVerified]);
 
   if (user) {
     return (
@@ -104,7 +104,7 @@ export default function LogedInAdminServiceProvider() {
           })}
         </section>
         <section className={styles.buttons}>
-          {user.displayName && user.emailVerified ? (
+          {user.displayName && user.emailVerified && skills.length !== 0 ? (
             <span className={styles.btn}>
               {user.displayName && (
                 <Link
@@ -127,7 +127,9 @@ export default function LogedInAdminServiceProvider() {
           )}
           <span
             className={`${styles.btn} ${
-              !user.displayName || !user.emailVerified ? styles.disabled : ""
+              skills.length === 0 || !user.displayName || !user.emailVerified
+                ? styles.disabled
+                : ""
             }`}
           >
             <Link href={"/blog/compose"}>

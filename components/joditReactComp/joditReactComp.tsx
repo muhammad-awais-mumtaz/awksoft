@@ -1,30 +1,29 @@
 "use client";
-import React, { useRef, useState, ChangeEvent, FormEvent } from "react";
-import { Editor } from "@tinymce/tinymce-react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 
-import styles from "./tinyMCEComp.module.css";
+import dynamic from "next/dynamic";
 
-export default function TinyMCEComp() {
-  const editorRef = useRef<any>(null);
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
+import styles from "./joditReactComp.module.css";
+
+export default function JoditReactComp() {
   const [blogHtml, setBlogHtml] = useState("");
+  const [content, setContent] = useState("");
   const [title, setTitle] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [category, setCategory] = useState<string>("");
   const [images, setImages] = useState<FileList | null>(null);
-  const [employeeId, setEmployeeId] = useState<string>("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(blogHtml, title, link, thumbnail, category, images, employeeId);
+    console.log(blogHtml, title, link, thumbnail, category, images);
   };
 
   const log = () => {
-    if (editorRef.current) {
-      setBlogHtml(editorRef.current.getContent());
-    }
+    setBlogHtml(content);
   };
 
   return (
@@ -42,7 +41,7 @@ export default function TinyMCEComp() {
           }
         />
         <br />
-        <label htmlFor="link">Link:</label>
+        <label htmlFor="link">Link: That will be used in address of blog</label>
         <input
           className={`${styles.block} ${styles.input}`}
           required
@@ -97,45 +96,19 @@ export default function TinyMCEComp() {
           required
           type="file"
           id="images"
+          accept="image/*"
           multiple
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setImages(event.target.files || null)
           }
         />
         <br />
-        <label htmlFor="employeeId">Employee ID:</label>
-        <input
-          className={`${styles.block} ${styles.input}`}
-          required
-          type="text"
-          id="employeeId"
-          value={employeeId}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setEmployeeId(event.target.value)
-          }
-        />
-        <br />
-        <Editor
-          id="hello_something_unique"
-          apiKey={process.env.NEXT_PUBLIC_TINYMCE_API}
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          init={{
-            height: 500,
-            menubar: false,
-            plugins:
-              "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
-            toolbar:
-              "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-            content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-            tinycomments_mode: "embedded",
-            tinycomments_author: "Author name",
-            mergetags_list: [
-              { value: "First.Name", title: "First Name" },
-              { value: "Email", title: "Email" },
-            ],
-          }}
-        />
+        <section className={styles.editorCont}>
+          <JoditEditor
+            value={content}
+            onChange={(newContent) => setContent(newContent)}
+          />
+        </section>
         <div className={styles.buttons}>
           <button type="submit">Submit</button>
           <span className={styles.btn} onClick={log}>

@@ -42,8 +42,8 @@ export default function SignUp() {
 
     // else successful
     if (result) {
-      console.log(result);
       const user = result.user;
+      router.push(`user/serviceProvider/compleatProfile`);
       updateUserNameOrPhoto(user, name, "").then(() => {
         const userData: serviceProvider = {
           employeeId: user.uid,
@@ -54,7 +54,6 @@ export default function SignUp() {
 
         uploadDataToCollection("serviceProvider", userData);
       });
-      return router.push(`user/serviceProvider/compleatProfile`);
     }
   };
 
@@ -68,7 +67,6 @@ export default function SignUp() {
         alert(error.code);
       }
     } else {
-      console.log(result);
       router.push("/admin");
     }
   };

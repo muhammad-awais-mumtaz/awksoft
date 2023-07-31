@@ -1,12 +1,3 @@
-.imageSection {
-  padding: 2rem;
-}
-
-.image {
-  border-radius: 40px;
-  animation: jump 2.5s infinite;
-}
-
 .form div {
   padding-bottom: 1rem;
 }
@@ -43,19 +34,4 @@
 .block {
   display: block;
   width: 100%;
-}
-
-@keyframes jump {
-  0% {
-    transform: translateY(0);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  50% {
-    transform: translateY(-20px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    transform: translateY(0);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
 }

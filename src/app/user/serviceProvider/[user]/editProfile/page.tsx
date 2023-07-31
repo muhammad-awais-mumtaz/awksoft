@@ -36,11 +36,7 @@ export default function EditProfile() {
   const handleSubmit = async () => {
     await updateUserNameOrPhoto(user, userName, newProfileLink);
     if (user?.displayName) {
-      router.push(
-        `/user/serviceProvider/${user.displayName
-          .toLowerCase()
-          .replace(/\s+/g, "-")}`
-      );
+      router.push("/admin");
     }
   };
 
@@ -48,21 +44,10 @@ export default function EditProfile() {
     <div className={styles.cont}>
       <div className={styles.warper}>
         <section className={styles.userNameAndProfileUpdate}>
-          <h2>Previous Name and profile</h2>
-          <p>{user?.displayName}</p>
-          {user?.photoURL && (
-            <div>
-              <Image
-                className={styles.proImg}
-                src={user.photoURL}
-                height={100}
-                width={100}
-                alt={"Profile image of " + user.displayName}
-                priority
-              />
-            </div>
-          )}
           <form className={styles.form}>
+            <h3 className={styles.warn}>
+              Input the field which you want to change. Other left empty!
+            </h3>
             <h2>New Name and Profile</h2>
             <div>
               <label className={styles.block} htmlFor="profilePic">

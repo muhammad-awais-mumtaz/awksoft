@@ -1,9 +1,9 @@
 "use client";
 import styles from "./compose.module.css";
-import TinyMCEComp from "../../../../components/tinyMCEComp/tinyMCEComp";
 import Link from "next/link";
 
 import { useAuth } from "../../../../utils/firebase/auth/useAuth";
+import JoditReactComp from "../../../../components/joditReactComp/joditReactComp";
 
 export default function Compose() {
   const user = useAuth();
@@ -11,7 +11,7 @@ export default function Compose() {
     return (
       <>
         <div className={styles.cont}>
-          <TinyMCEComp />
+          <JoditReactComp />
         </div>
       </>
     );
