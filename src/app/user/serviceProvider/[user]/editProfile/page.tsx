@@ -1,11 +1,15 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./editProfile.module.css";
 import { useAuth } from "../../../../../../utils/firebase/auth/useAuth";
 import { updateUserNameOrPhoto } from "../../../../../../utils/firebase/updateUser/updateUser";
 import { uploadImage } from "../../../../../../utils/firebase/uploadImage/uploadImage";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {
+  getDataFromCollection,
+  updateDataToCollection,
+} from "../../../../../../utils/firebase/firestore/databaseManip";
 
 export default function EditProfile() {
   const user = useAuth();
@@ -14,6 +18,16 @@ export default function EditProfile() {
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [userName, setUserName] = useState("");
   const [newProfileLink, setNewProfileLink] = useState("");
+  const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getDataFromCollection("serviceProvider");
+      setServiceProvidersData(data);
+    };
+
+    fetchData();
+  }, []);
 
   const handleImageSelection = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -35,9 +49,18 @@ export default function EditProfile() {
 
   const handleSubmit = async () => {
     await updateUserNameOrPhoto(user, userName, newProfileLink);
-    if (user?.displayName) {
-      router.push("/admin");
+    async function updateServiceProvider() {
+      serviceProvidersData.map((singleProvider) => {
+        if (user?.uid === singleProvider.employeeId) {
+          updateDataToCollection("serviceProvider", singleProvider.id, {
+            profileImage: newProfileLink,
+          });
+          router.push("/admin");
+        }
+      });
     }
+
+    updateServiceProvider();
   };
 
   return (

@@ -35,12 +35,18 @@ export default function LogedInAdminServiceProvider() {
   const user = useAuth();
   const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
+  const [skillsVerified, serSkillsVerified] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       let data = await getDataFromCollection("serviceProvider");
       setServiceProvidersData(data);
-      serviceProvidersData.map((singleData) => setSkills(singleData.skills));
+      serviceProvidersData.map((singleData) => {
+        if (singleData.employeeId === user?.uid) {
+          setSkills(singleData.skills);
+          serSkillsVerified(singleData.skillsVerified);
+        }
+      });
     };
 
     fetchData();
@@ -49,6 +55,14 @@ export default function LogedInAdminServiceProvider() {
   if (user) {
     return (
       <div className={styles.cont}>
+        {!skillsVerified && (
+          <div className={styles.topHeadCont}>
+            <h2 className={styles.warn}>
+              Your skills are not verified you can't compose a blog.
+            </h2>
+            We will verify them by a video 📽️ call 📞.
+          </div>
+        )}
         <section className={styles.profileDetails}>
           <div className={styles.proImg}>
             {user.photoURL ? (
@@ -127,7 +141,10 @@ export default function LogedInAdminServiceProvider() {
           )}
           <span
             className={`${styles.btn} ${
-              skills.length === 0 || !user.displayName || !user.emailVerified
+              skills.length === 0 ||
+              !user.displayName ||
+              !user.emailVerified ||
+              !skillsVerified
                 ? styles.disabled
                 : ""
             }`}

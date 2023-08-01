@@ -1,3 +1,11 @@
+.cont {
+  width: 60%;
+}
+.topHeadCont {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .img {
   border-radius: 50%;
 }
@@ -73,4 +81,10 @@
   opacity: 0.3; /* Lower the opacity to give a faded appearance */
   pointer-events: none; /* Disable pointer events to prevent interactions */
   cursor: not-allowed; /* Set the cursor to 'not allowed' to show it's disabled */
+}
+
+@media (max-width: 900px) {
+  .cont {
+    width: 100%;
+  }
 }

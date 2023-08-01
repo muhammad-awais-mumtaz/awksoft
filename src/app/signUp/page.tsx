@@ -40,15 +40,15 @@ export default function SignUp() {
       }
     }
 
-    // else successful
     if (result) {
       const user = result.user;
-      router.push(`user/serviceProvider/compleatProfile`);
+      router.push("user/serviceProvider/compleatProfile");
       updateUserNameOrPhoto(user, name, "").then(() => {
         const userData: serviceProvider = {
           employeeId: user.uid,
           name: user.displayName,
           skills: [],
+          skillsVerified: false,
           profileImage: user.photoURL,
         };
 
@@ -67,7 +67,19 @@ export default function SignUp() {
         alert(error.code);
       }
     } else {
-      router.push("/admin");
+      let user = result?.user;
+      if (user) {
+        router.push("user/serviceProvider/compleatProfile");
+        const userData: serviceProvider = {
+          employeeId: user.uid,
+          name: user.displayName,
+          skills: [],
+          skillsVerified: false,
+          profileImage: user.photoURL,
+        };
+
+        uploadDataToCollection("serviceProvider", userData);
+      }
     }
   };
 
