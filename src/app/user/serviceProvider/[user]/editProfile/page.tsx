@@ -15,7 +15,6 @@ export default function EditProfile() {
   const user = useAuth();
   const router = useRouter();
 
-  const [profilePic, setProfilePic] = useState<File | null>(null);
   const [userName, setUserName] = useState("");
   const [newProfileLink, setNewProfileLink] = useState("");
   const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
@@ -32,14 +31,12 @@ export default function EditProfile() {
   const handleImageSelection = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setProfilePic(file);
       try {
         const downloadURL = await uploadImage(
-          "user/serviceProvider/profile",
+          "user/serviceProvider/profile/",
           file
         );
         console.log("Image uploaded successfully. Download URL:", downloadURL);
-        setProfilePic(null);
         setNewProfileLink(downloadURL);
       } catch (error) {
         console.log(error);

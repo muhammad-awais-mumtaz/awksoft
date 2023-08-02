@@ -1,5 +1,16 @@
 import { serviceProvider } from "./serviceProvider";
 
+export interface blogPostInterface {
+  featuredImage: string;
+  uploadDate: string;
+  title: string;
+  url: string;
+  category: string;
+  images: string[];
+  blogDescription: string;
+  blogHtml: string;
+  employeeId: string;
+}
 export interface blogs {
   id: string;
   uid: string;
@@ -11,7 +22,7 @@ export interface blogs {
   images: string[];
   blogDescription: string;
   blogHtml: string;
-  uploader: serviceProvider;
+  employeeId: string;
 }
 
 export const blogsArray: blogs[] = [
@@ -26,13 +37,7 @@ export const blogsArray: blogs[] = [
     images: ["image1.jpg", "image2.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>This is the content of the blog.</p>",
-    uploader: {
-      employeeId: "1",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "2",
@@ -45,13 +50,7 @@ export const blogsArray: blogs[] = [
     images: ["image3.jpg", "image4.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>This is another blog.</p>",
-    uploader: {
-      employeeId: "2",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "3",
@@ -65,13 +64,7 @@ export const blogsArray: blogs[] = [
     blogDescription: "blog Description",
     blogHtml:
       "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero doloremque saepe incidunt. Minima officiis maiores temporibus mollitia dolores eius quo explicabo, eligendi id cumque ex, quam nostrum. Molestias, praesentium sit.</p>",
-    uploader: {
-      employeeId: "3",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "4",
@@ -84,13 +77,7 @@ export const blogsArray: blogs[] = [
     images: ["image7.jpg", "image8.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>This blog covers advanced web development techniques.</p>",
-    uploader: {
-      employeeId: "4",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "5",
@@ -103,13 +90,7 @@ export const blogsArray: blogs[] = [
     images: ["image9.jpg", "image10.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>Learn about the importance of color theory in design.</p>",
-    uploader: {
-      employeeId: "5",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "6",
@@ -122,13 +103,7 @@ export const blogsArray: blogs[] = [
     images: ["image11.jpg", "image12.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>Discover effective content marketing strategies.</p>",
-    uploader: {
-      employeeId: "6",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "7",
@@ -141,13 +116,7 @@ export const blogsArray: blogs[] = [
     images: ["image13.jpg", "image14.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>Learn how to create responsive web designs.</p>",
-    uploader: {
-      employeeId: "7",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "9",
@@ -160,13 +129,7 @@ export const blogsArray: blogs[] = [
     images: ["image15.jpg", "image16.jpg"],
     blogDescription: "blog Description",
     blogHtml: "<p>Explore the principles of user experience design.</p>",
-    uploader: {
-      employeeId: "8",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
   {
     id: "10",
@@ -180,12 +143,6 @@ export const blogsArray: blogs[] = [
     blogDescription: "m blog Description",
     blogHtml:
       "<p>Discover effective digital marketing strategies for e-commerce businesses.</p>",
-    uploader: {
-      employeeId: "10",
-      name: "Muhammad Awais Mumtaz",
-      skills: ["Web development, Project controller"],
-      profileImage: "/blog/myself",
-      blogger: true,
-    },
+    employeeId: "good",
   },
 ];

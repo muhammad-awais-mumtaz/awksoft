@@ -35,3 +35,7 @@
   display: block;
   width: 100%;
 }
+
+.heading {
+  margin: 2rem 0;
+}

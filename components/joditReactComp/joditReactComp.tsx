@@ -6,6 +6,12 @@ import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 import styles from "./joditReactComp.module.css";
+import { blogPostInterface } from "../../utils/blogs";
+import { uploadImage } from "../../utils/firebase/uploadImage/uploadImage";
+import Image from "next/image";
+import { useAuth } from "../../utils/firebase/auth/useAuth";
+import { uploadDataToCollection } from "../../utils/firebase/firestore/databaseManip";
+import { useRouter } from "next/navigation";
 
 export default function JoditReactComp() {
   const [blogHtml, setBlogHtml] = useState("");
@@ -13,13 +19,75 @@ export default function JoditReactComp() {
   const [title, setTitle] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [category, setCategory] = useState<string>("");
-  const [images, setImages] = useState<FileList | null>(null);
+  const [imagesLinks, setImagesLinks] = useState<string[]>([]);
+  const [thumbnailLink, setThumbnailLink] = useState<string>("");
+
+  const user = useAuth();
+  const router = useRouter();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(blogHtml, title, link, thumbnail, category, images);
+    console.log(blogHtml, title, link, thumbnailLink, category, imagesLinks);
+    if (user?.uid) {
+      let dateIns = new Date();
+      let yearMonthDate = dateIns.toISOString().split("T")[0];
+      let blogPost: blogPostInterface = {
+        featuredImage: thumbnailLink,
+        uploadDate: yearMonthDate,
+        title: title,
+        url: link,
+        category: category,
+        images: imagesLinks,
+        blogDescription: description,
+        blogHtml: content,
+        employeeId: user.uid,
+      };
+      uploadDataToCollection("blogsPosts", blogPost);
+      router.push("/admin");
+    }
+  };
+
+  const uploadThumbnail = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+    if (file) {
+      try {
+        const downloadURL = await uploadImage("blog/thumbnail/", file);
+        console.log("Image uploaded successfully. Download URL:", downloadURL);
+        setThumbnailLink(downloadURL);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const uploadImagesToFirebase = async (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    let length = event.target.files?.length;
+    if (length) {
+      for (let index = 0; index < length; index++) {
+        const file = event.target.files?.[index];
+        if (title && file) {
+          try {
+            const downloadURL = await uploadImage(
+              `blog/posts/${title?.toLowerCase().replace(/\s+/g, "-")}/`,
+              file
+            );
+            imagesLinks.push(downloadURL);
+            setImagesLinks([...imagesLinks]);
+            console.log(imagesLinks);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          alert(
+            "May be you don't input title please enter title to upload images!"
+          );
+        }
+      }
+    }
   };
 
   const log = () => {
@@ -69,10 +137,21 @@ export default function JoditReactComp() {
           type="file"
           id="thumbnail"
           accept="image/*"
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setThumbnail(event.target.files?.[0] || null)
-          }
+          onChange={uploadThumbnail}
         />
+        {thumbnailLink && (
+          <div>
+            <h3 className={styles.heading}>Thumbnail link and preview is: </h3>
+            <Image
+              src={thumbnailLink}
+              height={200}
+              width={300}
+              alt="preview image"
+            />
+            <br />
+            {thumbnailLink}
+          </div>
+        )}
         <br />
         <label htmlFor="category">Category:</label>
         <select
@@ -98,10 +177,28 @@ export default function JoditReactComp() {
           id="images"
           accept="image/*"
           multiple
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setImages(event.target.files || null)
-          }
+          onChange={uploadImagesToFirebase}
         />
+        {imagesLinks.length !== 0 && (
+          <div>
+            <h3 className={styles.heading}>
+              Images links and previews is: Don't worry these are just previews.
+              Just copy and past the image link to use.
+            </h3>
+            {imagesLinks.map((image, index) => (
+              <div key={index}>
+                <Image
+                  src={image}
+                  height={200}
+                  width={300}
+                  alt="preview images"
+                />
+                <br />
+                {image}
+              </div>
+            ))}
+          </div>
+        )}
         <br />
         <section className={styles.editorCont}>
           <JoditEditor
