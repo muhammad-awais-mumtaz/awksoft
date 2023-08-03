@@ -16,11 +16,13 @@ const firebaseConfig = {
 // Initialize Firebase for SSR
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 //Initialize google analytics
-const analytics = getAnalytics(app);
+if (typeof window !== "undefined") {
+  const analytics = getAnalytics(app);
+}
 
 // Initialize Firebase services
 const firestore = getFirestore(app);
 const auth = getAuth(app);
 
 // Export the instances we'll need
-export { app, firestore, auth, analytics };
+export { app, firestore, auth };

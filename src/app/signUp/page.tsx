@@ -47,6 +47,7 @@ export default function SignUp() {
         const userData: serviceProvider = {
           employeeId: user.uid,
           name: user.displayName,
+          email: user.email,
           skills: [],
           skillsVerified: false,
           profileImage: user.photoURL,
@@ -73,6 +74,7 @@ export default function SignUp() {
         const userData: serviceProvider = {
           employeeId: user.uid,
           name: user.displayName,
+          email: user.email,
           skills: [],
           skillsVerified: false,
           profileImage: user.photoURL,

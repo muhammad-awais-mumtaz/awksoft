@@ -3,8 +3,8 @@
 import styles from "./blogLinks.module.css";
 import { useState, useEffect, useMemo } from "react";
 
-import { blogsArray } from "../../utils/blogs";
 import BlogCard from "../blogCard/blogCard";
+import { getDataFromCollection } from "../../utils/firebase/firestore/databaseManip";
 
 const blogsPerPage = 9;
 
@@ -13,23 +13,30 @@ interface pageProps {
 }
 
 export default function BlogLinks({ category }: pageProps) {
-  let categorySpecificBlog = useMemo(
-    () =>
-      blogsArray.filter((blog) =>
-        blog.category.toLowerCase().includes(category.toLowerCase())
-      ),
-    [category]
-  );
+  const [blogsArray, setBlogsArray] = useState<any[]>([]);
+
+  let categorySpecificBlog = useMemo(() => {
+    return blogsArray.filter((blog) =>
+      blog.category.toLowerCase().includes(category.toLowerCase())
+    );
+  }, [category, blogsArray]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState(categorySpecificBlog);
 
   useEffect(() => {
+    const fetchData = async () => {
+      let data = await getDataFromCollection("blogsPosts");
+      setBlogsArray(data);
+    };
+
+    fetchData();
     const filtered = categorySpecificBlog.filter((blog) =>
       blog.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredBlogs(filtered);
-  }, [searchQuery, categorySpecificBlog]);
+  }, [searchQuery, categorySpecificBlog, blogsArray]);
 
   const startIndex = (currentPage - 1) * blogsPerPage;
   const endIndex = startIndex + blogsPerPage;
@@ -71,10 +78,10 @@ export default function BlogLinks({ category }: pageProps) {
           </span>
         </section>
         <div className={styles.cardCont}>
-          {displayedBlogs.map((card) => (
+          {displayedBlogs.map((card, index) => (
             <BlogCard
-              key={card.id}
-              uid={card.uid}
+              key={index}
+              uid={card.id}
               image={card.featuredImage}
               uploadDate={card.uploadDate}
               title={card.title}

@@ -169,7 +169,9 @@ export default function JoditReactComp() {
           <option value="Marketing">Marketing</option>
         </select>
         <br />
-        <label htmlFor="images">Images:</label>
+        <label htmlFor="images">
+          Images: Select all the images 🖼️ you want to use in blog.
+        </label>
         <input
           className={`${styles.block} ${styles.input}`}
           required

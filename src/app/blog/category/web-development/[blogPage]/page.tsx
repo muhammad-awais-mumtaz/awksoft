@@ -1,7 +1,10 @@
+"use client";
+
 import styles from "./blogPage.module.css";
-import { blogsArray } from "../../../../../../utils/blogs";
 import Image from "next/image";
 import { Metadata } from "next";
+import { getDataFromCollection } from "../../../../../../utils/firebase/firestore/databaseManip";
+import { useEffect, useState } from "react";
 
 interface pageProps {
   params: { blogPage: string };
@@ -13,7 +16,9 @@ export async function generateMetadata({
   searchParams,
 }: pageProps): Promise<Metadata> {
   let { id } = searchParams;
-  const blogPost = blogsArray.find((blog) => blog.uid === id);
+  const blogPost = (await getDataFromCollection("blogsPosts")).find(
+    (blog) => blog.uid === id
+  );
   return {
     title: blogPost?.title,
     description: blogPost?.blogDescription,
@@ -23,8 +28,20 @@ export async function generateMetadata({
 export default function Page({ params, searchParams }: pageProps) {
   let { blogPage } = params;
   let { id } = searchParams;
+  const [blogsArray, setBlogsArray] = useState<any[]>([]);
+  const [blogPost, setBlogPost] = useState<any>(null);
 
-  const blogPost = blogsArray.find((blog) => blog.uid === id);
+  useEffect(() => {
+    const fetchData = async () => {
+      getDataFromCollection("blogsPosts").then((data) => {
+        setBlogsArray(data);
+        setBlogPost(data.find((blog) => blog.id === id));
+        console.log(blogsArray);
+      });
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
