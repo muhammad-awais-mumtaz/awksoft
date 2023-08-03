@@ -1,7 +1,7 @@
 import styles from "./blogPage.module.css";
-import { blogsArray } from "../../../../../../utils/blogs";
 import Image from "next/image";
 import { Metadata } from "next";
+import { blogsArray } from "../../../../../../utils/blogs";
 
 interface pageProps {
   params: { blogPage: string };
