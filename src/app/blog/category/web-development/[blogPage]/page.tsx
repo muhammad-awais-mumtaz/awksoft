@@ -36,7 +36,6 @@ export default function Page({ params, searchParams }: pageProps) {
       getDataFromCollection("blogsPosts").then((data) => {
         setBlogsArray(data);
         setBlogPost(data.find((blog) => blog.id === id));
-        console.log(blogsArray);
       });
     };
 
