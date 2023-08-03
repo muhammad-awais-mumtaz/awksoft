@@ -1,7 +1,7 @@
 import styles from "./blogPage.module.css";
 import { getDataFromCollection } from "../../../../../../utils/firebase/firestore/databaseManip";
 import { Metadata } from "next";
-import WebDevClientComp from "../../../../../../components/webDevClientComp/webDevClientComp";
+import WebDevClientComp from "../../../../../../components/dynamicBlogPostPage/dynamicBlogPostPage";
 
 interface pageProps {
   params: { blogPage: string };
