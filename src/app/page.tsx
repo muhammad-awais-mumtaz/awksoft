@@ -2,33 +2,10 @@ import styles from "./page.module.css";
 import Hero from "../../components/hero/hero";
 import Properties from "../../components/properties/properties";
 import ActionCall from "../../components/actionCall/actionCall";
-import Head from "next/head";
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
-        <link rel="icon" href="/icon.ico" sizes="any" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon_io/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon_io/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon_io/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/favicon_io/site.webmanifest"></link>
-      </Head>
       <main className={styles.main}>
         <Hero />
         <ActionCall

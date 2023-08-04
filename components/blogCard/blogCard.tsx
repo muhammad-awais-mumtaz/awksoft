@@ -29,8 +29,8 @@ export default function BlogCard({
       >
         <section className={styles.image}>
           <Image
-            height={100}
             width={200}
+            height={100}
             src={image}
             alt={"Thumbnail of blog titled " + title}
             priority
