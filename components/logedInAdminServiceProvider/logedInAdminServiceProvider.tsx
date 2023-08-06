@@ -34,6 +34,8 @@ const blogs = [
 export default function LogedInAdminServiceProvider() {
   const user = useAuth();
   const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
+  const [blogsPosts, setBlogsPosts] = useState<any[]>([]);
+  const [blogsWrittenBy, setBlogsWrittenBy] = useState<any[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
   const [skillsVerified, serSkillsVerified] = useState(false);
 
@@ -47,6 +49,15 @@ export default function LogedInAdminServiceProvider() {
           serSkillsVerified(singleData.skillsVerified);
         }
       });
+
+      getDataFromCollection("blogsPosts").then((data) => {
+        setBlogsPosts(data);
+      });
+      setBlogsWrittenBy(
+        blogsPosts.filter((post) => {
+          return post.employeeId === user?.uid;
+        })
+      );
     };
 
     fetchData();
@@ -90,7 +101,7 @@ export default function LogedInAdminServiceProvider() {
               <h3>No user name please compleat your profile</h3>
             )}
             <div>
-              {user.email}{" "}
+              <p className={styles.email}> {user.email} </p>
               {user.emailVerified ? (
                 <BsCheckCircleFill />
               ) : (
@@ -112,9 +123,22 @@ export default function LogedInAdminServiceProvider() {
           </div>
         </section>
         <section className={styles.blogs}>
-          <h3>Composed blogs</h3>
-          {blogs.map((blog, i) => {
-            return <span key={i}>{blog}, </span>;
+          <h3>
+            Composed blogs: You can edit them by clicking on the links given
+            below!
+          </h3>
+          {blogsWrittenBy.map((blog, i) => {
+            return (
+              <div key={i}>
+                <Link
+                  href={`/blog/edit/${blog.title
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}?id=${blog.id}`}
+                >
+                  <span>{blog.title}, </span>
+                </Link>
+              </div>
+            );
           })}
         </section>
         <section className={styles.buttons}>

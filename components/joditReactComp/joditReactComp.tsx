@@ -97,16 +97,22 @@ export default function JoditReactComp() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title">
+          Title: Remaining characters: {65 - title.length}
+        </label>
         <input
           className={`${styles.block} ${styles.input}`}
           required
           type="text"
           id="title"
+          maxLength={65}
           value={title}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setTitle(event.target.value)
-          }
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            let { value } = event.target;
+            if (value.length <= 65) {
+              setTitle(event.target.value);
+            }
+          }}
         />
         <br />
         <label htmlFor="link">Link: That will be used in address of blog</label>

@@ -6,6 +6,10 @@
   margin-bottom: 2rem;
 }
 
+.email {
+  word-wrap: break-word;
+}
+
 .img {
   border-radius: 50%;
 }
@@ -43,6 +47,10 @@
 
 .blogs h3 {
   margin: 1rem 0 0.4rem 0;
+}
+
+.blogs div {
+  margin: 1.5rem 0;
 }
 
 .warn {
@@ -86,5 +94,15 @@
 @media (max-width: 900px) {
   .cont {
     width: 100%;
+    height: auto;
+  }
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons .btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: center;
   }
 }
