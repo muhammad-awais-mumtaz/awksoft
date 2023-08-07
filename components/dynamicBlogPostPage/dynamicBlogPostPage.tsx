@@ -13,14 +13,24 @@ export default function DynamicBlogPostPage({ id }: props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      getDataFromCollection("blogsPosts").then((data) => {
+      try {
+        const data = await getDataFromCollection("blogsPosts");
         setBlogsArray(data);
-        setBlogPost(data.find((blog) => blog.id === id));
-      });
+        const foundBlogPost = data.find((blog) => blog.id === id);
+        if (foundBlogPost) {
+          setBlogPost(foundBlogPost);
+        } else {
+          // Handle the case where the blog post with the specified id is not found.
+          console.warn(`Blog post with id '${id}' not found.`);
+        }
+      } catch (error) {
+        // Handle error if any
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <>

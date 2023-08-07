@@ -23,13 +23,6 @@
   outline: none;
 }
 
-.cardCont {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
 .nextPrevBtn {
   display: flex;
   justify-content: space-around;
@@ -61,11 +54,21 @@
   background-color: #d3e9ff;
 }
 
-@media (max-width: 900px) {
-  .card {
-    width: 250px;
-  }
+.hrCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
 
+.hrLine {
+  border: none;
+  border-top: 2px dotted #000;
+  width: 100px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
   .cont {
     margin-top: 3rem;
   }

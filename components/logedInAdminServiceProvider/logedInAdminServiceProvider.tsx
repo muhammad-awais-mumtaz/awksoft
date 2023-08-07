@@ -8,60 +8,51 @@ import { RxCross2 } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { ImBlog } from "react-icons/im";
 import { useEffect, useState } from "react";
-import { getDataFromCollection } from "../../utils/firebase/firestore/databaseManip";
-
-const blogs = [
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "Web development",
-  "Marketing",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-  "design",
-  "cooking",
-];
+import {
+  deleteDocument,
+  getDataFromCollection,
+} from "../../utils/firebase/firestore/databaseManip";
+import BlogCard from "../blogCard/blogCard";
+import { useRouter } from "next/navigation";
 
 export default function LogedInAdminServiceProvider() {
   const user = useAuth();
+  const router = useRouter();
+
   const [serviceProvidersData, setServiceProvidersData] = useState<any[]>([]);
   const [blogsPosts, setBlogsPosts] = useState<any[]>([]);
   const [blogsWrittenBy, setBlogsWrittenBy] = useState<any[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
-  const [skillsVerified, serSkillsVerified] = useState(false);
+  const [skillsVerified, setSkillsVerified] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await getDataFromCollection("serviceProvider");
-      setServiceProvidersData(data);
-      serviceProvidersData.map((singleData) => {
-        if (singleData.employeeId === user?.uid) {
-          setSkills(singleData.skills);
-          serSkillsVerified(singleData.skillsVerified);
-        }
-      });
-
-      getDataFromCollection("blogsPosts").then((data) => {
-        setBlogsPosts(data);
-      });
-      setBlogsWrittenBy(
-        blogsPosts.filter((post) => {
-          return post.employeeId === user?.uid;
-        })
+      const serviceProvidersData = await getDataFromCollection(
+        "serviceProvider"
       );
+      setServiceProvidersData(serviceProvidersData);
+
+      const blogsPosts = await getDataFromCollection("blogsPosts");
+      setBlogsPosts(blogsPosts);
+
+      const currentUserUID = user?.uid;
+      const currentUserData = serviceProvidersData.find(
+        (singleData) => singleData.employeeId === currentUserUID
+      );
+
+      if (currentUserData) {
+        setSkills(currentUserData.skills);
+        setSkillsVerified(currentUserData.skillsVerified);
+      }
+
+      const blogsWrittenByCurrentUser = blogsPosts.filter(
+        (post) => post.employeeId === currentUserUID
+      );
+      setBlogsWrittenBy(blogsWrittenByCurrentUser);
     };
 
     fetchData();
-  }, [serviceProvidersData, skills, user?.emailVerified]);
+  }, [user?.uid]);
 
   if (user) {
     return (
@@ -123,20 +114,46 @@ export default function LogedInAdminServiceProvider() {
           </div>
         </section>
         <section className={styles.blogs}>
-          <h3>
-            Composed blogs: You can edit them by clicking on the links given
-            below!
-          </h3>
+          <h3>Composed blogs:</h3>
+          {blogsWrittenBy.length === 0 && (
+            <h1 className={`${styles.warn} ${styles.blogWarning}`}>
+              No! blog posts you have written
+            </h1>
+          )}
           {blogsWrittenBy.map((blog, i) => {
             return (
-              <div key={i}>
-                <Link
-                  href={`/blog/edit/${blog.title
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}?id=${blog.id}`}
-                >
-                  <span>{blog.title}, </span>
-                </Link>
+              <div key={i} className={styles.blogCardCont}>
+                <BlogCard
+                  uid={blog.id}
+                  image={blog.featuredImage}
+                  uploadDate={blog.uploadDate}
+                  title={blog.title}
+                  url={blog.url}
+                  category={blog.category}
+                />
+                <div className={styles.buttons}>
+                  <Link
+                    className={styles.btn}
+                    href={`/blog/edit/${blog.title
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}?id=${blog.id}`}
+                  >
+                    edit
+                  </Link>
+                  <span
+                    className={styles.btnWarn}
+                    onClick={() => {
+                      deleteDocument("blogsPosts", blog.id).then(() => {
+                        router.refresh();
+                      });
+                    }}
+                  >
+                    Delete blog
+                  </span>
+                </div>
+                <div className={styles.hrCont}>
+                  <hr className={styles.hrLine} />
+                </div>
               </div>
             );
           })}

@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   updateDoc,
@@ -47,4 +48,12 @@ export async function getDataFromCollection(collectionName: string) {
     console.error("Error fetching data:", error);
     throw error;
   }
+}
+
+export async function deleteDocument(
+  collectionName: string,
+  documentId: string
+): Promise<void> {
+  const documentRef = doc(firestore, collectionName, documentId);
+  await deleteDoc(documentRef);
 }

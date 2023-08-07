@@ -35,3 +35,7 @@
 .heading {
   margin: 2rem 0;
 }
+
+.readonly {
+  opacity: 0.5;
+}

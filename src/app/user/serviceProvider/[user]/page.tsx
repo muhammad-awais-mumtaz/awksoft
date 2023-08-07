@@ -71,8 +71,9 @@ export default function Page({ params, searchParams }: pageProps) {
             <span
               className={styles.btn}
               onClick={() => {
-                auth.signOut();
-                router.push("/logIn");
+                auth.signOut().then(() => {
+                  router.push("/logIn");
+                });
               }}
             >
               Log out <AiOutlineLogout />

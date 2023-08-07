@@ -26,17 +26,19 @@ export default function BlogLinks({ category }: pageProps) {
   const [filteredBlogs, setFilteredBlogs] = useState(categorySpecificBlog);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAndFilter = async () => {
       let data = await getDataFromCollection("blogsPosts");
       setBlogsArray(data);
+
+      const filtered = data.filter((blog) =>
+        blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredBlogs(filtered);
+      console.log(filtered); // This will show the filtered blogs after the data is fetched and filtered.
     };
 
-    fetchData();
-    const filtered = categorySpecificBlog.filter((blog) =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredBlogs(filtered);
-  }, [searchQuery, categorySpecificBlog, blogsArray]);
+    fetchDataAndFilter();
+  }, []);
 
   const startIndex = (currentPage - 1) * blogsPerPage;
   const endIndex = startIndex + blogsPerPage;
@@ -79,15 +81,20 @@ export default function BlogLinks({ category }: pageProps) {
         </section>
         <div className={styles.cardCont}>
           {displayedBlogs.map((card, index) => (
-            <BlogCard
-              key={index}
-              uid={card.id}
-              image={card.featuredImage}
-              uploadDate={card.uploadDate}
-              title={card.title}
-              category={card.category}
-              url={card.url}
-            />
+            <div key={index}>
+              <BlogCard
+                key={index}
+                uid={card.id}
+                image={card.featuredImage}
+                uploadDate={card.uploadDate}
+                title={card.title}
+                category={card.category}
+                url={card.url}
+              />
+              <div className={styles.hrCont}>
+                <hr className={styles.hrLine} />
+              </div>
+            </div>
           ))}
         </div>
         <div className={styles.nextPrevBtn}>

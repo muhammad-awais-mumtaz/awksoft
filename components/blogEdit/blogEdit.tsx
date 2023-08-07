@@ -1,19 +1,27 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 import dynamic from "next/dynamic";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
-import styles from "./joditReactComp.module.css";
+import styles from "./blogEdit.module.css";
 import { blogPostInterface } from "../../utils/blogs";
 import { uploadImage } from "../../utils/firebase/uploadImage/uploadImage";
 import Image from "next/image";
 import { useAuth } from "../../utils/firebase/auth/useAuth";
-import { uploadDataToCollection } from "../../utils/firebase/firestore/databaseManip";
+import {
+  getDataFromCollection,
+  updateDataToCollection,
+  uploadDataToCollection,
+} from "../../utils/firebase/firestore/databaseManip";
 import { useRouter } from "next/navigation";
 
-export default function JoditReactComp() {
+interface props {
+  id: string;
+}
+
+export default function BlogEdit({ id }: props) {
   const [blogHtml, setBlogHtml] = useState("");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState<string>("");
@@ -26,25 +34,41 @@ export default function JoditReactComp() {
   const user = useAuth();
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      getDataFromCollection("blogsPosts")
+        .then((data) => {
+          let blogPost = data.find((blog) => blog.id === id);
+          setContent(blogPost.blogHtml);
+          setTitle(blogPost.title);
+          setLink(blogPost.url);
+          setDescription(blogPost.blogDescription);
+          setCategory(blogPost.category);
+          setImagesLinks(blogPost.images);
+          setThumbnailLink(blogPost.featuredImage);
+        })
+        .catch((error) => {
+          // Handle error if any
+          console.error("Error fetching data:", error);
+        });
+    };
+
+    fetchData();
+  }, [id]);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (user?.uid) {
-      let dateIns = new Date();
-      let yearMonthDate = dateIns.toISOString().split("T")[0];
-      let blogPost: blogPostInterface = {
-        featuredImage: thumbnailLink,
-        uploadDate: yearMonthDate,
-        title: title,
-        url: link,
-        category: category,
-        images: imagesLinks,
-        blogDescription: description,
-        blogHtml: content,
-        employeeId: user.uid,
-      };
-      uploadDataToCollection("blogsPosts", blogPost);
-      router.push("/admin");
-    }
+
+    let blogPost = {
+      featuredImage: thumbnailLink,
+      url: link,
+      category: category,
+      images: imagesLinks,
+      blogDescription: description,
+      blogHtml: content,
+    };
+    updateDataToCollection("blogsPosts", id, blogPost);
+    router.push("/admin");
   };
 
   const uploadThumbnail = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -96,15 +120,13 @@ export default function JoditReactComp() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title">
-          Title: Remaining characters: {65 - title.length}
-        </label>
+        <label htmlFor="title">Title: It is read only!</label>
         <input
-          className={`${styles.block} ${styles.input}`}
+          className={`${styles.block} ${styles.input} ${styles.readonly}`}
           required
+          readOnly
           type="text"
           id="title"
-          maxLength={65}
           value={title}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             let { value } = event.target;
@@ -138,7 +160,6 @@ export default function JoditReactComp() {
         <label htmlFor="thumbnail">Thumbnail:</label>
         <input
           className={`${styles.block} ${styles.input}`}
-          required
           type="file"
           id="thumbnail"
           accept="image/*"
@@ -179,7 +200,6 @@ export default function JoditReactComp() {
         </label>
         <input
           className={`${styles.block} ${styles.input}`}
-          required
           type="file"
           id="images"
           accept="image/*"
@@ -214,7 +234,7 @@ export default function JoditReactComp() {
           />
         </section>
         <div className={styles.buttons}>
-          <button type="submit">Upload</button>
+          <button type="submit">Update</button>
           <span className={styles.btn} onClick={log}>
             want to see the content
           </span>

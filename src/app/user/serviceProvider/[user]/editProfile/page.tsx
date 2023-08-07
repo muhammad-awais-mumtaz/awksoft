@@ -107,10 +107,10 @@ export default function EditProfile() {
             </div>
             <div>
               <label className={styles.block} htmlFor="newProfileLik">
-                New Profile Link
+                New Profile Link: Readonly!
               </label>
               <input
-                className={`${styles.block} ${styles.input}`}
+                className={`${styles.block} ${styles.input} ${styles.readonly}`}
                 type="text"
                 id="newProfileLik"
                 name="newProfileLik"
