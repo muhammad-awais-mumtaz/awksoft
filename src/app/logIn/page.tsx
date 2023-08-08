@@ -2,7 +2,6 @@
 
 import styles from "./logIn.module.css";
 import { FormEvent, useState } from "react";
-import { Metadata } from "next";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +11,11 @@ import { useRouter } from "next/navigation";
 import signIn from "../../../utils/firebase/auth/logIn";
 import { BiHide, BiShowAlt } from "react-icons/bi";
 import { signUserWithGoogleProvider } from "../../../utils/firebase/auth/signUpWithGoogle";
+import { serviceProvider } from "../../../utils/serviceProvider";
+import {
+  getDataFromCollection,
+  uploadDataToCollection,
+} from "../../../utils/firebase/firestore/databaseManip";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -55,8 +59,28 @@ export default function LogIn() {
         alert(error.code);
       }
     } else {
-      console.log(result);
-      router.push("/admin");
+      let user = result?.user;
+      if (user) {
+        const userData: serviceProvider = {
+          employeeId: user.uid,
+          name: user.displayName,
+          email: user.email,
+          skills: [],
+          skillsVerified: false,
+          profileImage: user.photoURL,
+        };
+        getDataFromCollection("serviceProvider").then((data) => {
+          let userInDatabase = data.find(
+            (singleUser) => singleUser.employeeId === user?.uid
+          );
+          if (!userInDatabase) {
+            router.push("user/serviceProvider/compleatProfile");
+            uploadDataToCollection("serviceProvider", userData);
+          } else {
+            router.push("/admin");
+          }
+        });
+      }
     }
   };
 
