@@ -12,16 +12,29 @@
   flex-direction: column;
 }
 
-.nevLinks {
-  margin-top: 1rem;
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
 }
 
-.nevLinks div {
-  padding-top: 0.5rem;
-}
-
-.nevLinks div a {
+.buttons .btn {
+  background-color: #d3e9ff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.5s;
+  border-radius: 7px;
+  margin: 2rem 0;
   text-decoration: none;
+}
+
+.buttons .btn:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+  border-radius: 5px;
+  transform: scale(1.05);
 }
 
 .crossDiv {
@@ -36,5 +49,15 @@
 @media (min-width: 900px) {
   .mobileMenuCont {
     display: none;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons .btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: center;
   }
 }

@@ -23,30 +23,25 @@ export default function MobileMenu(props: {
         <section className={styles.crossDivCont}>
           <ImCross className={styles.crossDiv} onClick={handleClick} />
         </section>
-        <section className={styles.nevLinks}>
+        <section className={styles.buttons}>
           {user && (
-            <div>
-              <Link href="/admin" onClick={handleClick}>
-                Admin
-              </Link>
-            </div>
+            <Link href="/admin" onClick={handleClick} className={styles.btn}>
+              Admin
+            </Link>
           )}
-          <div>
-            <Link href="/about" onClick={handleClick}>
-              About
-            </Link>
-          </div>
-          <div>
-            <Link href="/blog" onClick={handleClick}>
-              Blog
-            </Link>
-          </div>
+
+          <Link href="/about" onClick={handleClick} className={styles.btn}>
+            About
+          </Link>
+
+          <Link href="/blog" onClick={handleClick} className={styles.btn}>
+            Blog
+          </Link>
+
           {!user && (
-            <div>
-              <Link href="/logIn" onClick={handleClick}>
-                Log in
-              </Link>
-            </div>
+            <Link href="/logIn" onClick={handleClick} className={styles.btn}>
+              Log in
+            </Link>
           )}
         </section>
       </div>
