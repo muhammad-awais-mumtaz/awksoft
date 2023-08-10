@@ -134,7 +134,7 @@ export default function LogedInAdminServiceProvider() {
                 <div className={styles.buttons}>
                   <Link
                     className={styles.btn}
-                    href={`/blog/edit/${blog.title
+                    href={`/blog/edit/${blog.url
                       .toLowerCase()
                       .replace(/\s+/g, "-")}?id=${blog.id}`}
                   >
