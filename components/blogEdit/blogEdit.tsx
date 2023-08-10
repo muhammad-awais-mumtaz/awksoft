@@ -60,8 +60,8 @@ export default function BlogEdit({ id }: props) {
     event.preventDefault();
 
     let blogPost = {
+      title: title,
       featuredImage: thumbnailLink,
-      url: link,
       category: category,
       images: imagesLinks,
       blogDescription: description,
@@ -92,10 +92,10 @@ export default function BlogEdit({ id }: props) {
     if (length) {
       for (let index = 0; index < length; index++) {
         const file = event.target.files?.[index];
-        if (title && file) {
+        if (link && file) {
           try {
             const downloadURL = await uploadImage(
-              `blog/posts/${title?.toLowerCase().replace(/\s+/g, "-")}/`,
+              `blog/posts/${link?.toLowerCase().replace(/\s+/g, "-")}/`,
               file
             );
             imagesLinks.push(downloadURL);
@@ -120,17 +120,19 @@ export default function BlogEdit({ id }: props) {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title">Title: It is read only!</label>
+        <label htmlFor="title">
+          Title:Remaining characters: {60 - title.length}
+        </label>
         <input
           className={`${styles.block} ${styles.input} ${styles.readonly}`}
           required
-          readOnly
           type="text"
           id="title"
           value={title}
+          maxLength={60}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             let { value } = event.target;
-            if (value.length <= 65) {
+            if (value.length <= 60) {
               setTitle(event.target.value);
             }
           }}
@@ -140,6 +142,7 @@ export default function BlogEdit({ id }: props) {
         <input
           className={`${styles.block} ${styles.input}`}
           required
+          readOnly
           type="text"
           id="link"
           value={link}

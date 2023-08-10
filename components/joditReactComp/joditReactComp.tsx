@@ -68,10 +68,10 @@ export default function JoditReactComp() {
     if (length) {
       for (let index = 0; index < length; index++) {
         const file = event.target.files?.[index];
-        if (title && file) {
+        if (link && file) {
           try {
             const downloadURL = await uploadImage(
-              `blog/posts/${title?.toLowerCase().replace(/\s+/g, "-")}/`,
+              `blog/posts/${link?.toLowerCase().replace(/\s+/g, "-")}/`,
               file
             );
             imagesLinks.push(downloadURL);
@@ -97,18 +97,18 @@ export default function JoditReactComp() {
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="title">
-          Title: Remaining characters: {65 - title.length}
+          Title: Remaining characters: {60 - title.length}
         </label>
         <input
           className={`${styles.block} ${styles.input}`}
           required
           type="text"
           id="title"
-          maxLength={65}
+          maxLength={60}
           value={title}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             let { value } = event.target;
-            if (value.length <= 65) {
+            if (value.length <= 60) {
               setTitle(event.target.value);
             }
           }}
