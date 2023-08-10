@@ -124,7 +124,7 @@ export default function BlogEdit({ id }: props) {
           Title:Remaining characters: {60 - title.length}
         </label>
         <input
-          className={`${styles.block} ${styles.input} ${styles.readonly}`}
+          className={`${styles.block} ${styles.input}`}
           required
           type="text"
           id="title"
@@ -138,9 +138,9 @@ export default function BlogEdit({ id }: props) {
           }}
         />
         <br />
-        <label htmlFor="link">Link: That will be used in address of blog</label>
+        <label htmlFor="link">Link: It is readonly!</label>
         <input
-          className={`${styles.block} ${styles.input}`}
+          className={`${styles.block} ${styles.input}  ${styles.readonly}`}
           required
           readOnly
           type="text"
