@@ -1,30 +1,41 @@
 import styles from "./page.module.css";
 import Hero from "../../components/hero/hero";
 import Properties from "../../components/properties/properties";
-import ActionCall from "../../components/actionCall/actionCall";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
       <main className={styles.main}>
         <Hero />
-        <ActionCall
-          heading="If you have some idea"
-          text="If you have an idea for a project and would like to discuss it further, click the 'Let's Go' button below. Please share some information about your project and book a meeting with us. We look forward to exploring your ideas in detail."
-          linkOfVideo="https://www.youtube.com/embed/KMWx15H0SFs"
-          titleOfVideo="This video is introduction to our web site awksoft.com. It also tell what to do next. How can you hire a team with us."
-          linkOfButtonRedirect="/"
-          buttonText="lets go!"
-        />
+        <div className={styles.callToActionCont}>
+          <h1>If you have an idea: Lets have a meeting!</h1>
+          <div className={styles.photo}>
+            <div className={styles.imgCont}></div>
+          </div>
+          <p>
+            If you have an idea for a project and would like to discuss it
+            further, click the 'Let's Go' button below. We look forward to
+            exploring your ideas in detail. Lets make them reality to gather.
+          </p>
+          <div className={styles.btn}>
+            <Link href={"https://calendly.com/awksofts/15min"} target="_blank">
+              "lets go!"
+            </Link>
+          </div>
+        </div>
         <Properties />
-        <ActionCall
-          heading="If you know nothing"
-          text="If you would like to schedule a meeting with us to discuss your project, please click the 'Book a Meeting Now' button below. Even if you are not familiar with the details yet, we are here to help. Simply book a meeting, and we will be happy to have a conversation with you and assist you in any way we can."
-          linkOfVideo="https://www.youtube.com/embed/P5ytshZQo2U"
-          titleOfVideo="This video is about , 'what you can do if you know nothing'. This video tell you what you can do."
-          linkOfButtonRedirect="/"
-          buttonText="Book a meeting now"
-        />
+        <div className={styles.callToActionCont}>
+          <h1>What are you waiting for? Go book a meeting.</h1>
+          <div className={styles.photo2}>
+            <div className={styles.imgCont2}></div>
+          </div>
+          <div className={styles.btn}>
+            <Link href={"https://calendly.com/awksofts/15min"} target="_blank">
+              Book a meeting now
+            </Link>
+          </div>
+        </div>
       </main>
     </>
   );
