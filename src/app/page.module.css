@@ -45,6 +45,10 @@
   margin-bottom: 3rem;
 }
 
+.btn {
+  margin-top: 2rem;
+}
+
 .btn a {
   text-decoration: none;
   border: none;

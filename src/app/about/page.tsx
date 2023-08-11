@@ -3,6 +3,8 @@ import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "Awksoft - About",
+  description:
+    "About page of Awksoft the service providing company Reduce time and costs with our tailored teams for development, marketing, and design challenges.",
 };
 
 export default function About() {
