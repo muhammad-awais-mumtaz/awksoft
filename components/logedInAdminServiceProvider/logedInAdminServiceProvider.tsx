@@ -144,7 +144,7 @@ export default function LogedInAdminServiceProvider() {
                     className={styles.btnWarn}
                     onClick={() => {
                       deleteDocument("blogsPosts", blog.id).then(() => {
-                        router.refresh();
+                        router.push("/admin");
                       });
                     }}
                   >
