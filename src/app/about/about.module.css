@@ -1,0 +1,32 @@
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 6rem 2rem 0;
+}
+
+.photo {
+  margin: 2rem 0;
+  height: 100%;
+  width: 100%;
+}
+
+.imgCont {
+  background-image: url("../../../public/about/aboutWall.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  width: 100%;
+}
+
+.heading {
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+
+.para {
+  margin: 1.5rem 0 0;
+  font-size: 2rem;
+}
