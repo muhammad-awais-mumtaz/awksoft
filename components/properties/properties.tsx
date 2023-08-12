@@ -53,6 +53,7 @@ export default function Properties() {
                 width={150}
                 height={150}
                 priority
+                loading="lazy"
               />
             </div>
             <div className={styles.text}>
