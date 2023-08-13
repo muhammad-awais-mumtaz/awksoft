@@ -142,9 +142,9 @@ export default function LogedInAdminServiceProvider() {
                   </Link>
                   <span
                     className={styles.btnWarn}
-                    onClick={() => {
+                    onClick={async () => {
                       deleteDocument("blogsPosts", blog.id).then(() => {
-                        router.push("/admin");
+                        router.refresh();
                       });
                     }}
                   >
