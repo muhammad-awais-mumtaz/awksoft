@@ -52,7 +52,6 @@ export default function Properties() {
                 alt={e.title}
                 width={150}
                 height={150}
-                priority
                 loading="lazy"
               />
             </div>

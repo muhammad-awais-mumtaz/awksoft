@@ -18,6 +18,36 @@ export async function generateMetadata({
   return {
     title: blogPost?.title,
     description: blogPost?.blogDescription,
+    metadataBase: new URL(
+      `https://awksoft.com/blog/category/${blogPost.category
+        .toLowerCase()
+        .replace(/\s+/g, "-")}/${blogPost.url.replace(/\s+/g, "+")}?id=${
+        blogPost.id
+      }`
+    ),
+    openGraph: {
+      type: "article",
+      url: `https://awksoft.com/blog/category/${blogPost.category
+        .toLowerCase()
+        .replace(/\s+/g, "-")}/${blogPost.url.replace(/\s+/g, "+")}?id=${
+        blogPost.id
+      }`,
+      title: blogPost.title,
+      description:
+        "Awksoft.com is a website where you will find best web development teams, design teams and marketing teams.",
+      siteName: "Awksoft",
+      images: [
+        {
+          url: blogPost.featuredImage,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@awksoft.com",
+      creator: "@_awksoft",
+      images: blogPost.featuredImage,
+    },
   };
 }
 
