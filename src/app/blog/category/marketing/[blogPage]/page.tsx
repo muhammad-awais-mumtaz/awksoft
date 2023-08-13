@@ -34,8 +34,7 @@ export async function generateMetadata({
         blogPost.id
       }`,
       title: blogPost.title,
-      description:
-        "Awksoft.com is a website where you will find best web development teams, design teams and marketing teams.",
+      description: blogPost.blogDescription,
       siteName: "Awksoft",
       images: [
         {
