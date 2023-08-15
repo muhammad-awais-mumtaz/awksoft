@@ -20,6 +20,7 @@ export default function About() {
         Islamabad, Pakistan. We use new tricks to make your business even
         better.
       </p>
+      <h2 className={styles.contact}>awais@awksoft.com</h2>
     </div>
   );
 }
