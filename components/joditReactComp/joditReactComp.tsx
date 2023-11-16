@@ -179,7 +179,6 @@ export default function JoditReactComp() {
         </label>
         <input
           className={`${styles.block} ${styles.input}`}
-          required
           type="file"
           id="images"
           accept="image/*"
