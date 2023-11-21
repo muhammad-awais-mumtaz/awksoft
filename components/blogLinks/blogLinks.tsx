@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./blogLinks.module.css";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 import BlogCard from "../blogCard/blogCard";
 import { getDataFromCollection } from "../../utils/firebase/firestore/databaseManip";
@@ -14,31 +14,24 @@ interface pageProps {
 
 export default function BlogLinks({ category }: pageProps) {
   const [blogsArray, setBlogsArray] = useState<any[]>([]);
-
-  let categorySpecificBlog = useMemo(() => {
-    return blogsArray.filter((blog) =>
-      blog.category.toLowerCase().includes(category.toLowerCase())
-    );
-  }, [category, blogsArray]);
-
+  const [filteredBlogs, setFilteredBlogs] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBlogs, setFilteredBlogs] = useState(categorySpecificBlog);
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
       let data = await getDataFromCollection("blogsPosts");
       setBlogsArray(data);
 
-      const filtered = data.filter((blog) =>
-        blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+      // Filter blogs based on the specified category
+      const categorySpecificBlogs = data.filter((blog) =>
+        blog.category.toLowerCase().includes(category.toLowerCase())
       );
-      setFilteredBlogs(filtered);
-      console.log(filtered); // This will show the filtered blogs after the data is fetched and filtered.
+
+      setFilteredBlogs(categorySpecificBlogs);
     };
 
     fetchDataAndFilter();
-  }, []);
+  }, [category]); // Re-run effect when category changes
 
   const startIndex = (currentPage - 1) * blogsPerPage;
   const endIndex = startIndex + blogsPerPage;
@@ -52,33 +45,9 @@ export default function BlogLinks({ category }: pageProps) {
     setCurrentPage(currentPage - 1);
   };
 
-  const handleSearchChange = (e: any) => {
-    setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset page to 1 when search query changes
-  };
-
-  const handleClearSearch = () => {
-    setSearchQuery("");
-    setCurrentPage(1); // Reset page to 1 when search query is cleared
-  };
-
   return (
     <>
       <div className={styles.cont}>
-        <section className={styles.search}>
-          <input
-            className={styles.input}
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Search blogs"
-          />
-          <span>
-            <button className={styles.btn} onClick={handleClearSearch}>
-              Clear
-            </button>
-          </span>
-        </section>
         <div className={styles.cardCont}>
           {displayedBlogs.map((card, index) => (
             <div key={index}>
