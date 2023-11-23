@@ -10,10 +10,18 @@
   width: 50%;
 }
 
+
+
 .details h1 {
   width: 60%;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   text-align: justify;
+}
+
+.hr{
+  border-width: 2px;
+  border-style: solid;
+  margin: 0.7rem 0;
 }
 
 .details p {

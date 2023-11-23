@@ -10,6 +10,7 @@ export default function Hero() {
           <h1>
             Custom Teams for Your Project: Streamline Your Workflow and Save
             Costs!
+          <hr className={styles.hr}/>
           </h1>
           <p>
             At our company, we offer tailored teams to suit your specific
