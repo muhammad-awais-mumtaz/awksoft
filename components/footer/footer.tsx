@@ -9,11 +9,12 @@ export default function Footer() {
     <>
       <div className={styles.cont}>
         <section className={styles.linksCont}>
-          <Link href={"https://twitter.com/_awksoft"}>
+          <Link href={"https://twitter.com/_awksoft"} target="_blank">
             twitter <BsTwitter />
           </Link>
           <Link
             href={"https://web.facebook.com/people/Awksoft/100094570092780/"}
+            target="_blank"
           >
             facebook <FaFacebook />
           </Link>
